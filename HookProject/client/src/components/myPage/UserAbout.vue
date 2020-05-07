@@ -39,20 +39,20 @@
                 v-model="name"
                 class="form-control"
                 name="name"
-                placeholder="Enter your first name"
+                placeholder="your name"
               />
             </div>
             <div class="form-group">
               <label for="tel">Role</label>
               <input
                 type="text"
-                v-model="phone_number"
+                v-model="roles"
                 class="form-control"
-                name="phone_number"
+                name="roles"
                 placeholder="Role"
               />
             </div>
-            <div class="form-group">
+            <!-- <div class="form-group">
               <label for="name">Introduce</label>
               <input
                 type="text"
@@ -61,7 +61,7 @@
                 name="name"
                 placeholder="Enter your name"
               />
-            </div>
+            </div>-->
           </div>
         </form>
       </div>
@@ -71,9 +71,19 @@
 
 <script>
 import swal from "sweetalert";
+import axios from "axios";
 
 export default {
-  data() {
+  data: function() {
+    this.getUser().then(res => {
+      //console.log(res)
+      this.name = res.user.name;
+      this.email = res.user.email;
+      this.password = res.user.password;
+      this.roles = res.user.roles;
+      console.log(this.id);
+      return res;
+    });
     return {
       currentTab: 0,
       tab: null,
@@ -81,29 +91,18 @@ export default {
       email: "",
       password: "",
       name: "",
-      role: 1
+      roles: ""
     };
   },
   methods: {
-    /* getUser() {
-      return axios
-        .get("http://13.125.253.47/api/myabout", {
-          headers: { Authorization: `Bearer ${localStorage.usertoken}` }
-        })
-        .then(res => {
-          return res.data;
-        })
-        .catch(err => {
-          console.log(err);
-        });
-    }, */
     getUser() {
       return axios
-        .get("http://13.125.253.47/api/profile/", {
+        .get("/api/myabout/", {
           headers: { Authorization: `Bearer ${localStorage.usertoken}` }
         })
         .then(res => {
-          EventBus.$emit("logged-in", "loggedin");
+          console.log(res.data);
+          return res.data;
         })
         .catch(err => {
           console.log(err);

@@ -5,10 +5,11 @@ export default function(Vue) {
   Vue.refresh = {
     checktoken() {
       axios
-        .get("http://13.125.253.47/api/profile/", {
+        .get("http://13.125.253.47/api/auth/profile/", {
           headers: { Authorization: `Bearer ${localStorage.usertoken}` }
         })
         .then(res => {
+          console.log(res);
           EventBus.$emit("logged-in", "loggedin");
         })
         .catch(err => {

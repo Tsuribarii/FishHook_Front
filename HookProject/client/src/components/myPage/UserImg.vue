@@ -3,28 +3,21 @@
     <div class="row">
       <!-- 이미지업로드 -->
 
-      <div v-if="!userImage" class="upload-btn-wrapper">
+      <div v-if="!profile_photo" class="upload-btn-wrapper">
         <button class="UploadImg">Upload Image</button>
         <input
           style="display:inline;"
           type="file"
-          name="myfile"
+          name="profile_photo"
           round
           class="change-profile-image"
-          @change="onFileChange"
+          @change="imageChanged"
         />
       </div>
-      <div v-else>
-        <button
-          class="delete-profile-image"
-          color="secondary"
-          icon="delete"
-          @click="removeImage"
-        >
-          Delete
-        </button>
-      </div>
       <!-- 이미지업로드 끝 -->
+      <div v-else>
+        <img :src="profile_photo" width="382" height="460" />
+      </div>
     </div>
     <!-- div class col 끝 -->
 
@@ -37,8 +30,7 @@
     <div class="row">
       <div>
         <!-- 유저이름 -->
-        <h1>유저이름{{ name }}</h1>
-        &nbsp&nbsp &nbsp&nbsp &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+        <h1>유저이름{{ name }}</h1>&nbsp&nbsp &nbsp&nbsp &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
         <svg
           class="bi bi-geo-alt"
           color="#75a8f2"
@@ -62,14 +54,17 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
-  data() {
+  data:function() {
     this.getUser().then(res => {
       this.name = res.user.name;
+      this.profile_photo = res.user.profile_photo;
       return res;
     });
     return {
-      name: ""
+      name: "",
+      profile_photo: ""
     };
   },
   data: {
@@ -78,7 +73,7 @@ export default {
   methods: {
     getUser() {
       return axios
-        .get("http://13.125.253.47/api/profile", {
+        .get("/api/myabout", {
           headers: { Authorization: `Bearer ${localStorage.usertoken}` }
         })
         .then(res => {
@@ -88,41 +83,35 @@ export default {
           console.log(err);
         });
     },
-    onFileChange(e) {
-      var files = e.target.files || e.dataTransfer.files;
-      if (!files.length) {
-        return;
-      }
-      this.createImage(files[0]);
-    },
-    createImage(file) {
-      var reader = new FileReader();
-      var vm = this;
-
-      reader.onload = e => {
-        vm.userImage = e.target.result;
+    imageChanged(e) {
+      console.log(e.target.files[0]);
+      var fileReader = new FileReader();
+      fileReader.readAsDataURL(e.target.files[0]);
+      fileReader.onload = e => {
+        this.user.profile_photo = e.target.result;
       };
-      reader.readAsDataURL(file);
     },
-    removeImage: function(e) {
-      this.userImage = "";
-    },
-    update() {
-      //axios.defaults.headers.common['Authorization'] = 'Bearer ' + Vue.auth.getToken()
-      axios
-        .post("http://13.125.253.47/api/myupdate", {
-          profile_photo: this.profile_photo
-        })
-        .then(res => {
-          localStorage.setItem("usertoken", res.data.token);
-          this.profile_photo = "";
-          console.log(res);
-        })
-        .catch(err => {
-          console.log(err);
-          console.log(err.response);
-        });
-      this.emitMethod();
+    create() {
+      this.$validator.updateDictionary({
+        al: {
+          attributes: {
+            name: "emri"
+          }
+        }
+      });
+      this.$validator.setLocale("al");
+
+      this.$validator.validateAll().then(() => {
+        axios
+          .post("http://13.125.253.47/api/myupdate", this.profile_photo)
+          .then(response => {
+            /* this.$router.push('/') */
+            console.log(response);
+          })
+          .catch(err => {
+            console.log(err.response);
+          });
+      });
     },
     emitMethod() {
       EventBus.$emit("logged-in", "loggedin");

@@ -59,7 +59,8 @@
             </svg>
           </router-link>
         </li>
-        <li v-if="auth == 'loggedin'" class="nav-item">
+        <!-- 일반유저 -->
+        <li v-if="auth == 'loggedin' && roles =='1'" class="nav-item">
           <router-link class="nav-link" to="/usermypage">
             <svg
               class="bi bi-person-fill"
@@ -77,6 +78,26 @@
             </svg>
           </router-link>
         </li>
+        <!-- 판매자 -->
+        <li v-if="auth == 'loggedin' && roles =='2'" class="nav-item">
+          <router-link class="nav-link" to="/sellermypage">
+            <svg
+              class="bi bi-person-fill"
+              width="1em"
+              height="1em"
+              viewBox="0 0 16 16"
+              fill="currentColor"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 100-6 3 3 0 000 6z"
+                clip-rule="evenodd"
+              />
+            </svg>
+          </router-link>
+        </li>
+
         <li v-if="auth == 'loggedin'" class="nav-item">
           <router-link class="nav-link" to="/notification">
             <svg
@@ -134,6 +155,9 @@
         <li v-if="auth == 'loggedin'" class="nav-item">
           <router-link class="nav-link" to="/profile">Profile</router-link>
         </li>
+        <li v-if="auth == 'loggedin'" class="nav-item">
+          <router-link class="nav-link" to="/mypage">Mypage</router-link>
+        </li>
       </ul>
     </div>
   </nav>
@@ -141,6 +165,7 @@
 
 <script>
 import EventBus from "./EventBus";
+import axios from "axios";
 
 EventBus.$on("logged-in", test => {
   console.log(test);
@@ -148,15 +173,33 @@ EventBus.$on("logged-in", test => {
 
 export default {
   data() {
+    this.getUser().then(res => {
+      this.roles = res.user.roles;
+      return res;
+    });
     return {
       auth: "",
-      user: ""
+      user: "",
+      roles: ""
     };
   },
   methods: {
     logout() {
       localStorage.removeItem("usertoken");
       this.$router.push("/");
+    },
+    getUser() {
+      return axios
+        .get("/api/auth/profile", {
+          headers: { Authorization: `Bearer ${localStorage.usertoken}` }
+        })
+        .then(res => {
+          // console.log(res.data)
+          return res.data;
+        })
+        .catch(err => {
+          console.log(err);
+        });
     }
   },
   mounted() {

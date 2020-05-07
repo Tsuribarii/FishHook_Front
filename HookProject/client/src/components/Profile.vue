@@ -32,12 +32,13 @@ export default {
     return {
       name: "",
       email: ""
+      
     };
   },
   methods: {
     getUser() {
       return axios
-        .get("/api/profile", {
+        .get("/api/auth/profile", {
           headers: { Authorization: `Bearer ${localStorage.usertoken}` }
         })
         .then(res => {
