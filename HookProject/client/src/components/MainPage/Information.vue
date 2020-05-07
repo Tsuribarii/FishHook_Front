@@ -7,12 +7,20 @@
         width="20%"
         style="margin-top:15%;"
       />
+      <img
+        id="bigpic"
+        src="bigpic"
+        width="15%"
+        style="display:none;  z-index:10; position:absolute; top:15%;"
+      />
     </div>
     <!-- 여기부터 첫째장 -->
     <div v-show="currentTab === 0">
       <!-- 첫째줄 -->
       <div class="row">
         <button
+          @mouseover="picture"
+          @mouseout="original"
           class="btn btn-lg btn-outline-secondary2"
           v-on:click="InformationResult"
         >
@@ -87,7 +95,6 @@
     <!-- 전체 레이아웃 -->
   </div>
 </template>
-
 <script>
 export default {
   data() {
@@ -100,6 +107,16 @@ export default {
   methods: {
     InformationResult() {
       this.$router.push("/info_re");
+    },
+    picture() {
+      var pic = "/static/map_first.png";
+      document.getElementById("bigpic").src = pic.replace("90x90", "225x225");
+      document.getElementById("bigpic").style.display = "block";
+    },
+    original() {
+      var org = "/static/info_map.png";
+      document.getElementById("bigpic").src = org.replace("90x90", "225x225");
+      document.getElementById("bigpic").style.display = "block";
     }
   }
 };

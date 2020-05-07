@@ -202,7 +202,7 @@ export default {
         });
     }
   },
-  mounted() {
+  mounted () {
     EventBus.$on("logged-in", status => {
       this.auth = status;
     });

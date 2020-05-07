@@ -10,34 +10,87 @@
             <th scope="col">유저 프로필</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody v-for="rank in ranks" v-bind:key="rank.id" :rank="rank">
           <tr>
             <th scope="row">1</th>
-            <td>picture</td>
-            <td>76cm</td>
-            <td>Tom</td>
-          </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>picture</td>
-            <td>48cm</td>
-            <td>Jason</td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td>picture</td>
-            <td>30cm</td>
-            <td>Mark</td>
+            <td>{{ rank.photo }}</td>
+            <td>{{ rank.length }} cm</td>
+            <td>{{ rank.name }}</td>
           </tr>
         </tbody>
       </table>
     </div>
     <div class="form-group" style="margin-top: 10%;">
-      <router-link to="/camera" tag="button" class="btn btn-lg btn-outline-secondary1">Camera</router-link>
+      <router-link
+        to="/camera"
+        tag="button"
+        class="btn btn-lg btn-outline-secondary1"
+        >Camera</router-link
+      >
     </div>
   </div>
 </template>
 
 <script>
-export default {};
+import axios from "axios";
+
+export default {
+  props: ["rank"],
+  data() {
+    this.getUser().then(res => {
+      this.name = res.user.name;
+      this.email = res.user.email;
+      this.password = res.user.password;
+      return res;
+    });
+    /*     let contentItems = data.Content.sort((a, b) => {
+      return b.rank.length - a.rank.length;
+    });
+    let items = contentItems.map(contentItem => {
+      return {
+        ...contentItem,
+        user_name: data.User.filter(userItem => {
+          return contentItem.user_id === userItem.user_id;
+        })[0].name
+      };
+    }); */
+
+    return {
+      name: "",
+      email: "",
+      password: "",
+      ranks: []
+    };
+  },
+  created() {
+    axios
+      .get("/api/rank")
+      .then(response => {
+        //this.products = response.body
+        //this.products = response
+        this.ranks = response.data;
+        //console.log(response)
+        console.log(response.data);
+        //console.log(response.body)
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  },
+  methods: {
+    getUser() {
+      return axios
+        .get("/api/auth/profile", {
+          headers: { Authorization: `Bearer ${localStorage.usertoken}` }
+        })
+        .then(res => {
+          // console.log(res.data)
+          return res.data;
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    }
+  }
+};
 </script>

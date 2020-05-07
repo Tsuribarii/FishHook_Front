@@ -18,6 +18,7 @@ import * as VueGoogleMaps from "vue2-google-maps";
 import VueScrollTo from "vue-scrollto";
 import Carousel3d from "vue-carousel-3d";
 import VueGeolocation from "vue-browser-geolocation";
+import "./registerServiceWorker";
 
 Vue.use(VueScrollTo, Carousel3d);
 Vue.config.productionTip = false;
@@ -73,6 +74,8 @@ new Vue({
   beforeCreate() {
     this.$refresh.checktoken();
   },
-  components: { App },
+  components: {
+    App
+  },
   template: "<App/>"
 });

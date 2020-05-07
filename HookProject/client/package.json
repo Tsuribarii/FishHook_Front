@@ -1,17 +1,17 @@
 {
   "name": "client",
   "version": "1.0.0",
+  "private": true,
   "description": "A Vue.js project",
   "author": "MOONEUNBEEN <e_bb@daum.net>",
-  "private": true,
   "scripts": {
-    "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
-    "start": "npm run dev",
-    "unit": "jest --config test/unit/jest.conf.js --coverage",
-    "e2e": "node test/e2e/runner.js",
-    "test": "npm run unit && npm run e2e",
+    "build": "node build/build.js",
     "lint": "eslint --ext .js,.vue src test/unit test/e2e/specs",
-    "build": "node build/build.js"
+    "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
+    "e2e": "node test/e2e/runner.js",
+    "start": "npm run dev",
+    "test": "npm run unit && npm run e2e",
+    "unit": "jest --config test/unit/jest.conf.js --coverage"
   },
   "dependencies": {
     "axios": "^0.18.0",
@@ -21,6 +21,7 @@
     "cors": "^2.8.5",
     "jquery": "^3.5.0",
     "luxon": "^1.23.0",
+    "register-service-worker": "^1.7.1",
     "sweetalert": "^1.1.3",
     "vee-validate": "^2.0.0-beta.25",
     "vue": "^2.6.10",
@@ -41,6 +42,7 @@
     "weekstart": "^1.0.1"
   },
   "devDependencies": {
+    "@vue/cli-plugin-pwa": "^4.3.1",
     "autoprefixer": "^7.1.2",
     "babel-core": "^6.22.1",
     "babel-eslint": "^8.2.1",
@@ -98,13 +100,13 @@
     "webpack-dev-server": "^2.9.1",
     "webpack-merge": "^4.1.0"
   },
-  "engines": {
-    "node": ">= 6.0.0",
-    "npm": ">= 3.0.0"
-  },
   "browserslist": [
     "> 1%",
     "last 2 versions",
     "not ie <= 8"
-  ]
+  ],
+  "engines": {
+    "node": ">= 6.0.0",
+    "npm": ">= 3.0.0"
+  }
 }
