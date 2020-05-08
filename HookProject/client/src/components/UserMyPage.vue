@@ -35,7 +35,7 @@
     <br />
     <div class="row" style="width:280px; display:inline-block;">
       <div>
-        <b>Profile &nbsp&nbsp ─────────────</b>
+        <b>Profile &nbsp;&nbsp; ─────────────</b>
       </div>
     </div>
     <br />
@@ -44,7 +44,7 @@
       <div>
         <!-- 유저이름 -->
 
-        <h1 style="display:inline">{{ name }}</h1>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+        <h1 style="display:inline">{{ name }}</h1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <svg
           class="bi bi-geo-alt"
           color="#75a8f2"
@@ -311,18 +311,18 @@
             <hr />
             <div style="margin-top:2%; margin-bottom:2%;">
               <b style="color: #A6A6A6;">일정</b>
-              &nbsp&nbsp
+              &nbsp;&nbsp;
               <b>2020.03.25(수) {{ rental.departure_date }} AM11:00 {{ rental.ship_id }}</b>
             </div>
             <div style="margin-top:2%; margin-bottom:2%;">
               <b style="color: #A6A6A6;">업체</b>
-              &nbsp&nbsp
+              &nbsp;&nbsp;
               <b>은빈이네 선박</b>
             </div>
             <hr />
             <div style="margin-top:2%; margin-bottom:2%;">
               <b style="color: #A6A6A6;">결제금액</b>
-              &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               <b
                 style="color: #ED0000;"
               >60,000 so sad... {{ rental.ship_id }} 원</b>
@@ -341,98 +341,98 @@
 </template>
 
 <script>
-import axios from "axios";
-import UserRental from "@/components/UserRental";
+import axios from 'axios'
+import UserRental from '@/components/UserRental'
 
 export default {
   components: {
     UserRental
   },
-  props: ["rental"],
-  data() {
+  props: ['rental'],
+  data () {
     this.getUser().then(res => {
-      this.name = res.user.name;
-      this.email = res.user.email;
-      this.password = res.user.password;
-      this.roles = res.user.roles;
-      this.profile_photo = res.user.profile_photo;
-      return res;
-    });
+      this.name = res.user.name
+      this.email = res.user.email
+      this.password = res.user.password
+      this.roles = res.user.roles
+      this.profile_photo = res.user.profile_photo
+      return res
+    })
     return {
       currentTab: 0,
       tab: null,
-      items: ["about", "check"],
-      name: "",
-      email: "",
-      password: "",
-      roles: "",
-      profile_photo: "",
+      items: ['about', 'check'],
+      name: '',
+      email: '',
+      password: '',
+      roles: '',
+      profile_photo: '',
       rentals: []
-    };
+    }
   },
-  created() {
+  created () {
     axios
-      .get("/api/mycheck", {
+      .get('/api/mycheck', {
         headers: { Authorization: `Bearer ${localStorage.usertoken}` }
       })
       .then(response => {
-        //this.products = response.body
-        //this.products = response
-        this.rentals = response.data;
-        //console.log(response)
-        console.log(response.data);
-        //console.log(response.body)
+        // this.products = response.body
+        // this.products = response
+        this.rentals = response.data
+        // console.log(response)
+        console.log(response.data)
+        // console.log(response.body)
       })
       .catch(err => {
-        console.log(err);
-      });
+        console.log(err)
+      })
   },
   methods: {
-    getUser() {
+    getUser () {
       return axios
-        .get("/api/auth/profile", {
+        .get('/api/auth/profile', {
           headers: { Authorization: `Bearer ${localStorage.usertoken}` }
         })
         .then(res => {
           // console.log(res.data)
-          return res.data;
+          return res.data
         })
         .catch(err => {
-          console.log(err);
-        });
+          console.log(err)
+        })
     },
-    imageChanged(e) {
-      console.log(e.target.files[0]);
-      var fileReader = new FileReader();
-      fileReader.readAsDataURL(e.target.files[0]);
+    imageChanged (e) {
+      console.log(e.target.files[0])
+      var fileReader = new FileReader()
+      fileReader.readAsDataURL(e.target.files[0])
       fileReader.onload = e => {
-        this.user.profile_photo = e.target.result;
-      };
+        this.user.profile_photo = e.target.result
+      }
     },
-    update() {
+    update () {
       this.$validator.updateDictionary({
         al: {
           attributes: {
-            name: "emri"
+            name: 'emri'
           }
         }
-      });
-      this.$validator.setLocale("al");
+      })
+      this.$validator.setLocale('al')
 
       this.$validator.validateAll().then(() => {
         axios
-          .post("/api/myupdate", this.profile_photo)
+          .post('/api/myupdate', this.profile_photo)
           .then(response => {
             /* this.$router.push('/') */
-            console.log(response);
+            console.log(response)
           })
           .catch(err => {
-            console.log(err.response);
-          });
-      });
+            console.log(err.response)
+          })
+      })
     }
   }
-};
+}
 </script>
 
 <style>

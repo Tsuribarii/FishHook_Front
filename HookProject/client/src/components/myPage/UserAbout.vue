@@ -70,66 +70,66 @@
 </template>
 
 <script>
-import swal from "sweetalert";
-import axios from "axios";
+import swal from 'sweetalert'
+import axios from 'axios'
 
 export default {
-  data: function() {
+  data () {
     this.getUser().then(res => {
-      //console.log(res)
-      this.name = res.user.name;
-      this.email = res.user.email;
-      this.password = res.user.password;
-      this.roles = res.user.roles;
-      console.log(this.id);
-      return res;
-    });
+      // console.log(res)
+      this.name = res.user.name
+      this.email = res.user.email
+      this.password = res.user.password
+      this.roles = res.user.roles
+      console.log(this.id)
+      return res
+    })
     return {
       currentTab: 0,
       tab: null,
-      items: ["about", "check"],
-      email: "",
-      password: "",
-      name: "",
-      roles: ""
-    };
+      items: ['about', 'check'],
+      email: '',
+      password: '',
+      name: '',
+      roles: ''
+    }
   },
   methods: {
-    getUser() {
+    getUser () {
       return axios
-        .get("/api/myabout/", {
+        .get('/api/myabout/', {
           headers: { Authorization: `Bearer ${localStorage.usertoken}` }
         })
         .then(res => {
-          console.log(res.data);
-          return res.data;
+          console.log(res.data)
+          return res.data
         })
         .catch(err => {
-          console.log(err);
-          console.log(err.response);
-        });
+          console.log(err)
+          console.log(err.response)
+        })
     },
-    update() {
+    update () {
       if (!this.password) {
         swal(
-          "??��?��?��?���?? 湲곗?��??��?��?��二쇱�???��?��?��",
-          "??��?��?��?���?? 湲곗?��??��?��?��二쇱�???��?��?��",
-          "error",
+          '??��?��?��?���?? 湲곗?��??��?��?��二쇱�???��?��?��',
+          '??��?��?��?���?? 湲곗?��??��?��?��二쇱�???��?��?��',
+          'error',
           {
-            button: "OK"
+            button: 'OK'
           }
-        );
+        )
       } else {
         axios
           .post(
-            "http://13.125.253.47/api/myupdate/" + this.$route.params.product,
+            '/api/myupdate/' + this.$route.params.product,
             this.product
           )
           .then(response => {
-            swal("Updated!", "Your product has been updated!", "success");
-          });
+            swal('Updated!', 'Your product has been updated!', 'success')
+          })
       }
     }
   }
-};
+}
 </script>

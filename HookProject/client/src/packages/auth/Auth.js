@@ -11,7 +11,7 @@ export default function (Vue) {
       var token = localStorage.getItem('token')
       var expiration = localStorage.getItem('expiration')
 
-      if (! token || ! expiration) {
+      if (!token || !expiration) {
         return null
       }
 
@@ -29,7 +29,7 @@ export default function (Vue) {
     },
 
     isAuthenticated () {
-      if(this.getToken()) {
+      if (this.getToken()) {
         return true
       } else {
         return false

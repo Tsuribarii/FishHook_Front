@@ -90,18 +90,18 @@
               <hr />
               <div style="margin-top:2%; margin-bottom:2%;">
                 <b style="color: #A6A6A6;">일정</b>
-                &nbsp&nbsp
+                &nbsp;&nbsp;
                 <b>2020.03.25(수) AM11:00</b>
               </div>
               <div style="margin-top:2%; margin-bottom:2%;">
                 <b style="color: #A6A6A6;">업체</b>
-                &nbsp&nbsp
+                &nbsp;&nbsp;
                 <b>은빈이네 선박</b>
               </div>
               <hr />
               <div style="margin-top:2%; margin-bottom:2%;">
                 <b style="color: #A6A6A6;">결제금액</b>
-                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <b style="color: #ED0000;">60,000원</b>
               </div>
             </div>
@@ -132,18 +132,18 @@
               <hr />
               <div style="margin-top:2%; margin-bottom:2%;">
                 <b style="color: #A6A6A6;">일정</b>
-                &nbsp&nbsp
+                &nbsp;&nbsp;
                 <b>2020.03.25(수) AM11:00</b>
               </div>
               <div style="margin-top:2%; margin-bottom:2%;">
                 <b style="color: #A6A6A6;">업체</b>
-                &nbsp&nbsp
+                &nbsp;&nbsp;
                 <b>든든한 낚시</b>
               </div>
               <hr />
               <div style="margin-top:2%; margin-bottom:2%;">
                 <b style="color: #A6A6A6;">결제금액</b>
-                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <b style="color: #ED0000;">60,000원</b>
               </div>
             </div>
@@ -153,26 +153,28 @@
     </div>
   </div>
 </template>
-<style>
-.tab:hover {
-  color: #6185f3;
-}
-</style>
+
 <script>
-import UserImg from "@/components/myPage/UserImg";
-import UserAbout from "@/components/myPage/UserAbout";
+import UserImg from '@/components/myPage/UserImg'
+import UserAbout from '@/components/myPage/UserAbout'
 
 export default {
   components: {
     UserImg,
     UserAbout
   },
-  data() {
+  data () {
     return {
       currentTab: 0,
       tab: null,
-      items: ["about", "check"]
-    };
+      items: ['about', 'check']
+    }
   }
-};
+}
 </script>
+
+<style>
+.tab:hover {
+  color: #6185f3;
+}
+</style>

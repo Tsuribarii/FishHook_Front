@@ -97,27 +97,27 @@
 </template>
 <script>
 export default {
-  data() {
+  data () {
     return {
       currentTab: 0,
       tab: null,
-      items: ["←", "→"]
-    };
+      items: ['←', '→']
+    }
   },
   methods: {
-    InformationResult() {
-      this.$router.push("/info_re");
+    InformationResult () {
+      this.$router.push('/info_re')
     },
-    picture() {
-      var pic = "/static/map_first.png";
-      document.getElementById("bigpic").src = pic.replace("90x90", "225x225");
-      document.getElementById("bigpic").style.display = "block";
+    picture () {
+      var pic = '/static/map_first.png'
+      document.getElementById('bigpic').src = pic.replace('90x90', '225x225')
+      document.getElementById('bigpic').style.display = 'block'
     },
-    original() {
-      var org = "/static/info_map.png";
-      document.getElementById("bigpic").src = org.replace("90x90", "225x225");
-      document.getElementById("bigpic").style.display = "block";
+    original () {
+      var org = '/static/info_map.png'
+      document.getElementById('bigpic').src = org.replace('90x90', '225x225')
+      document.getElementById('bigpic').style.display = 'block'
     }
   }
-};
+}
 </script>

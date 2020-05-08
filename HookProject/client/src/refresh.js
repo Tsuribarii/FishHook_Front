@@ -18,9 +18,9 @@ export default function (Vue) {
         .catch(err => {
           console.log(err)
           console.log(err.response)
-        });
+        })
     }
-  };
+  }
   Object.defineProperties(Vue.prototype, {
     $refresh: {
       get () {

@@ -7,16 +7,16 @@
 </template>
 
 <script>
-import Navbar from "./components/Navbar";
-import Bottom from "./components/Footer";
+import Navbar from './components/Navbar'
+import Bottom from './components/Footer'
 
 export default {
-  name: "App",
+  name: 'App',
   components: {
     navbar: Navbar,
     bottom: Bottom
   }
-};
+}
 </script>
 
 <style>
@@ -43,7 +43,7 @@ export default {
 
 .btn-outline-secondary2 {
   border-color: #93c3f3;
-  color: #black;
+  color: black;
 }
 
 .btn-outline-secondary2:hover {

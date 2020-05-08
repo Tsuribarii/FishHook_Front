@@ -24,104 +24,103 @@
 </template>
 
 <script>
-import VueCkeditor from "vue-ckeditor2";
-import swal from "sweetalert";
-import axios from "axios";
+import VueCkeditor from 'vue-ckeditor2'
+import swal from 'sweetalert'
+import axios from 'axios'
 
 export default {
   components: { VueCkeditor },
-  data() {
+  data () {
     return {
-      content: "",
+      content: '',
       config: {
         toolbar: [
-          { name: "document", items: ["Source"] },
+          { name: 'document', items: ['Source'] },
           {
-            name: "basicstyles",
+            name: 'basicstyles',
             items: [
-              "Bold",
-              "Italic",
-              "Underline",
-              "Strike",
-              "Subscript",
-              "Superscript"
+              'Bold',
+              'Italic',
+              'Underline',
+              'Strike',
+              'Subscript',
+              'Superscript'
             ]
           },
           {
-            name: "paragraph",
+            name: 'paragraph',
             items: [
-              "NumberedList",
-              "BulletedList",
-              "-",
-              "JustifyLeft",
-              "JustifyCenter",
-              "JustifyRight",
-              "JustifyBlock"
+              'NumberedList',
+              'BulletedList',
+              '-',
+              'JustifyLeft',
+              'JustifyCenter',
+              'JustifyRight',
+              'JustifyBlock'
             ]
           },
-          { name: "links", items: ["Link", "Unlink"] },
-          { name: "insert", items: ["Image", "Table"] },
-          "/",
-          { name: "styles", items: ["Font", "FontSize"] },
-          { name: "colors", items: ["TextColor", "BGColor"] }
+          { name: 'links', items: ['Link', 'Unlink'] },
+          { name: 'insert', items: ['Image', 'Table'] },
+          '/',
+          { name: 'styles', items: ['Font', 'FontSize'] },
+          { name: 'colors', items: ['TextColor', 'BGColor'] }
         ],
         height: 300
       },
       board: {}
-    };
+    }
   },
-  created() {
+  created () {
     axios
-      .get("http://13.125.253.47/api/show/" + this.$route.params.board)
+      .get('/api/show/' + this.$route.params.board)
       .then(response => {
-        this.board = response.data;
+        this.board = response.data
       })
       .catch(err => {
-        console.log(err);
-      });
+        console.log(err)
+      })
   },
   methods: {
-    onBlur(evt) {
-      console.log(evt);
+    onBlur (evt) {
+      console.log(evt)
     },
-    onFocus(evt) {
-      console.log(evt);
+    onFocus (evt) {
+      console.log(evt)
     },
-    onContentDom(evt) {
-      console.log(evt);
+    onContentDom (evt) {
+      console.log(evt)
     },
-    onDialogDefinition(evt) {
-      console.log(evt);
+    onDialogDefinition (evt) {
+      console.log(evt)
     },
-    onFileUploadRequest(evt) {
-      console.log(evt);
+    onFileUploadRequest (evt) {
+      console.log(evt)
     },
-    onFileUploadResponse(evt) {
-      console.log(evt);
+    onFileUploadResponse (evt) {
+      console.log(evt)
     },
-    deleteArticle(board) {
+    deleteArticle (board) {
       swal(
         {
-          title: "Are you sure?",
-          text: "You will not be able to recover this article!",
-          type: "warning",
+          title: 'Are you sure?',
+          text: 'You will not be able to recover this article!',
+          type: 'warning',
           showCancelButton: true,
-          confirmButtonColor: "#DD6B55",
-          confirmButtonText: "Yes, delete it!",
+          confirmButtonColor: '#DD6B55',
+          confirmButtonText: 'Yes, delete it!',
           closeOnConfirm: false
         },
-        function() {
+        function () {
           axios
-            .delete("http://13.125.253.47/api/delete/" + board.id)
+            .delete('/api/delete/' + board.id)
             .then(response => {
-              let index = this.board.indexOf(board);
-              this.boards.splice(index, 1);
-              swal("Deleted!", "Your article has been deleted", "success");
-            });
+              let index = this.board.indexOf(board)
+              this.boards.splice(index, 1)
+              swal('Deleted!', 'Your article has been deleted', 'success')
+            })
         }.bind(this)
-      );
+      )
     }
   }
-};
+}
 </script>
-

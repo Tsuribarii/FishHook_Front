@@ -30,40 +30,40 @@
   </div>
 </template>
 
-<style>
-.tab:hover {
-  color: #6185f3;
-}
-</style>
-
 <script>
-import UserImg from "@/components/myPage/UserImg";
-import UserAbout from "@/components/myPage/UserAbout";
+import UserImg from '@/components/myPage/UserImg'
+import UserAbout from '@/components/myPage/UserAbout'
 
 export default {
   components: {
     UserImg,
     UserAbout
   },
-  data() {
+  data () {
     return {
       currentTab: 0,
       tab: null,
-      items: ["about", "check"],
+      items: ['about', 'check'],
 
       demoEvents: [
         {
-          date: "2020/03/18", // Required
-          title: "은빈이네 선박 AM10:30" // Required
+          date: '2020/03/18', // Required
+          title: '은빈이네 선박 AM10:30' // Required
         },
         {
-          date: "2020/03/12",
-          title: "든든한 선박 PM11:00",
-          desc: "description",
-          customClass: "disabled highlight" // Custom classes to an calendar cell
+          date: '2020/03/12',
+          title: '든든한 선박 PM11:00',
+          desc: 'description',
+          customClass: 'disabled highlight' // Custom classes to an calendar cell
         }
       ]
-    };
+    }
   }
-};
+}
 </script>
+
+<style>
+.tab:hover {
+  color: #6185f3;
+}
+</style>

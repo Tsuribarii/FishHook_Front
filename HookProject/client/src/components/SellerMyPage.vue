@@ -35,7 +35,7 @@
     <br />
     <div class="row" style="width:280px; display:inline-block;">
       <div>
-        <b>Profile &nbsp&nbsp ─────────────</b>
+        <b>Profile &nbsp;&nbsp; ─────────────</b>
       </div>
     </div>
     <br />
@@ -44,7 +44,7 @@
       <div>
         <!-- 유저이름 -->
 
-        <h1 style="display:inline">{{ name }}</h1>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+        <h1 style="display:inline">{{ name }}</h1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <svg
           class="bi bi-geo-alt"
           color="#75a8f2"
@@ -153,86 +153,86 @@
 </template>
 
 <script>
-import axios from "axios";
+import axios from 'axios'
 export default {
-  data: function() {
+  data () {
     this.getUser().then(res => {
-      this.name = res.user.name;
-      this.email = res.user.email;
-      this.password = res.user.password;
-      this.roles = res.user.roles;
-      this.profile_photo = res.user.profile_photo;
-      return res;
-    });
+      this.name = res.user.name
+      this.email = res.user.email
+      this.password = res.user.password
+      this.roles = res.user.roles
+      this.profile_photo = res.user.profile_photo
+      return res
+    })
     return {
       currentTab: 0,
       tab: null,
-      items: ["about", "check"],
+      items: ['about', 'check'],
       demoEvents: [
         {
-          date: "2020/03/18", // Required
-          title: "은빈이네 선박 AM10:30" // Required
+          date: '2020/03/18', // Required
+          title: '은빈이네 선박 AM10:30' // Required
         },
         {
-          date: "2020/03/12",
-          title: "든든한 선박 PM11:00",
-          desc: "description",
-          customClass: "disabled highlight" // Custom classes to an calendar cell
+          date: '2020/03/12',
+          title: '든든한 선박 PM11:00',
+          desc: 'description',
+          customClass: 'disabled highlight' // Custom classes to an calendar cell
         }
       ],
-      name: "",
-      email: "",
-      password: "",
-      roles: "",
-      profile_photo: "",
-    };
+      name: '',
+      email: '',
+      password: '',
+      roles: '',
+      profile_photo: ''
+    }
   },
   methods: {
-    getUser() {
+    getUser () {
       return axios
-        .get("/api/myabout", {
+        .get('/api/myabout', {
           headers: { Authorization: `Bearer ${localStorage.usertoken}` }
         })
         .then(res => {
           // console.log(res.data)
-          return res.data;
+          return res.data
         })
         .catch(err => {
-          console.log(err);
-        });
+          console.log(err)
+        })
     },
-    imageChanged(e) {
-      console.log(e.target.files[0]);
-      var fileReader = new FileReader();
-      fileReader.readAsDataURL(e.target.files[0]);
+    imageChanged (e) {
+      console.log(e.target.files[0])
+      var fileReader = new FileReader()
+      fileReader.readAsDataURL(e.target.files[0])
       fileReader.onload = e => {
-        this.user.profile_photo = e.target.result;
-      };
+        this.user.profile_photo = e.target.result
+      }
     },
-    update() {
+    update () {
       this.$validator.updateDictionary({
         al: {
           attributes: {
-            name: "emri"
+            name: 'emri'
           }
         }
-      });
-      this.$validator.setLocale("al");
+      })
+      this.$validator.setLocale('al')
 
       this.$validator.validateAll().then(() => {
         axios
-          .post("http://13.125.253.47/api/myupdate", this.profile_photo)
+          .post('/api/myupdate', this.profile_photo)
           .then(response => {
             /* this.$router.push('/') */
-            console.log(response);
+            console.log(response)
           })
           .catch(err => {
-            console.log(err.response);
-          });
-      });
+            console.log(err.response)
+          })
+      })
     }
   }
-};
+}
 </script>
 
 <style>

@@ -164,48 +164,48 @@
 </template>
 
 <script>
-import EventBus from "./EventBus";
-import axios from "axios";
+import EventBus from './EventBus'
+import axios from 'axios'
 
-EventBus.$on("logged-in", test => {
-  console.log(test);
-});
+EventBus.$on('logged-in', test => {
+  console.log(test)
+})
 
 export default {
-  data() {
+  data () {
     this.getUser().then(res => {
-      this.roles = res.user.roles;
-      return res;
-    });
+      this.roles = res.user.roles
+      return res
+    })
     return {
-      auth: "",
-      user: "",
-      roles: ""
-    };
+      auth: '',
+      user: '',
+      roles: ''
+    }
   },
   methods: {
-    logout() {
-      localStorage.removeItem("usertoken");
-      this.$router.push("/");
+    logout () {
+      localStorage.removeItem('usertoken')
+      this.$router.push('/')
     },
-    getUser() {
+    getUser () {
       return axios
-        .get("/api/auth/profile", {
+        .get('/api/auth/profile', {
           headers: { Authorization: `Bearer ${localStorage.usertoken}` }
         })
         .then(res => {
           // console.log(res.data)
-          return res.data;
+          return res.data
         })
         .catch(err => {
-          console.log(err);
-        });
+          console.log(err)
+        })
     }
   },
   mounted () {
-    EventBus.$on("logged-in", status => {
-      this.auth = status;
-    });
+    EventBus.$on('logged-in', status => {
+      this.auth = status
+    })
   }
-};
+}
 </script>

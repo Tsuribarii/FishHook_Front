@@ -53,18 +53,18 @@
       <hr />
       <div style="margin-top:2%; margin-bottom:2%;">
         <b style="color: #A6A6A6;">일정</b>
-        &nbsp&nbsp
+        &nbsp;&nbsp;
         <b>2020.03.25(수) {{ rental.departure_date }} AM11:00 {{ rental.ship_id }}</b>
       </div>
       <div style="margin-top:2%; margin-bottom:2%;">
         <b style="color: #A6A6A6;">업체</b>
-        &nbsp&nbsp
+        &nbsp;&nbsp;
         <b>은빈이네 선박</b>
       </div>
       <hr />
       <div style="margin-top:2%; margin-bottom:2%;">
         <b style="color: #A6A6A6;">결제금액</b>
-        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <b
           style="color: #ED0000;"
         >60,000 {{ rental.ship_id }} 원</b>

@@ -4,16 +4,14 @@
   </div>
 </template>
 
-<script type="text/javascript">
-  import axios from 'axios'
+<script>
+export default {
+  data () {
+    return {
 
-  export default {
-    data() {
-      return {
-
-      }
-    },
+    }
   }
+}
 </script>
 
 <style>

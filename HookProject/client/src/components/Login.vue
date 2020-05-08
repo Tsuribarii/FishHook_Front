@@ -49,43 +49,43 @@
 </template>
 
 <script>
-import axios from "axios";
-import router from "../router";
-import EventBus from "./EventBus";
+import axios from 'axios'
+import router from '../router'
+import EventBus from './EventBus'
 
 export default {
-  data() {
+  data () {
     return {
-      email: "",
-      password: ""
-    };
+      email: '',
+      password: ''
+    }
   },
   methods: {
-    login() {
-      //axios.defaults.headers.common['Authorization'] = 'Bearer ' + Vue.auth.getToken()
+    login () {
+      // axios.defaults.headers.common['Authorization'] = 'Bearer ' + Vue.auth.getToken()
       axios
-        .post("/api/auth/login", {
+        .post('/api/auth/login', {
           email: this.email,
           password: this.password
         })
         .then(res => {
-          localStorage.setItem("usertoken", res.data.token);
-          this.email = "";
-          this.password = "";
-          router.push({ name: "Home" });
-          console.log(res);
+          localStorage.setItem('usertoken', res.data.token)
+          this.email = ''
+          this.password = ''
+          router.push({ name: 'Home' })
+          console.log(res)
         })
         .catch(err => {
-          console.log(err);
-          console.log(err.response);
-        });
-      this.emitMethod();
+          console.log(err)
+          console.log(err.response)
+        })
+      this.emitMethod()
     },
-    emitMethod() {
-      EventBus.$emit("logged-in", "loggedin");
+    emitMethod () {
+      EventBus.$emit('logged-in', 'loggedin')
     }
   }
-};
+}
 </script>
 
 <style>

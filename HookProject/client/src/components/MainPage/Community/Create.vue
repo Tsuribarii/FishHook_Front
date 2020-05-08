@@ -16,47 +16,47 @@
 </template>
 
 <script>
-import VueCkeditor from "vue-ckeditor2";
+import VueCkeditor from 'vue-ckeditor2'
 
 export default {
   components: { VueCkeditor },
-  data() {
+  data () {
     return {
-      content: "",
+      content: '',
       config: {
         toolbar: [
-          { name: 'document', items : [ 'Source' ] }, 
-          { name: 'basicstyles', items : [ 'Bold','Italic','Underline','Strike','Subscript','Superscript' ] },
-          { name: 'paragraph', items : [ 'NumberedList','BulletedList','-','JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock' ] }, 
-          { name: 'links', items : [ 'Link','Unlink' ] }, 
-          { name: 'insert', items : [ 'Image','Table' ] },
+          { name: 'document', items: [ 'Source' ] },
+          { name: 'basicstyles', items: [ 'Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript' ] },
+          { name: 'paragraph', items: [ 'NumberedList', 'BulletedList', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock' ] },
+          { name: 'links', items: [ 'Link', 'Unlink' ] },
+          { name: 'insert', items: [ 'Image', 'Table' ] },
           '/',
-          { name: 'styles', items : [ 'Font', 'FontSize' ] }, 
-          { name: 'colors', items : [ 'TextColor', 'BGColor' ] }
+          { name: 'styles', items: [ 'Font', 'FontSize' ] },
+          { name: 'colors', items: [ 'TextColor', 'BGColor' ] }
         ],
         height: 300
       }
-    };
+    }
   },
   methods: {
-    onBlur(evt) {
-      console.log(evt);
+    onBlur (evt) {
+      console.log(evt)
     },
-    onFocus(evt) {
-      console.log(evt);
+    onFocus (evt) {
+      console.log(evt)
     },
-    onContentDom(evt) {
-      console.log(evt);
+    onContentDom (evt) {
+      console.log(evt)
     },
-    onDialogDefinition(evt) {
-      console.log(evt);
+    onDialogDefinition (evt) {
+      console.log(evt)
     },
-    onFileUploadRequest(evt) {
-      console.log(evt);
+    onFileUploadRequest (evt) {
+      console.log(evt)
     },
-    onFileUploadResponse(evt) {
-      console.log(evt);
+    onFileUploadResponse (evt) {
+      console.log(evt)
     }
   }
-};
+}
 </script>

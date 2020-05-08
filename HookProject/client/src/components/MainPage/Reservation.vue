@@ -14,12 +14,11 @@
 </template>
 
 <script>
-import Vue from "vue";
-import axios from "axios";
-import Datetime from "vue-datetime";
-import "vue-datetime/dist/vue-datetime.css";
+import Vue from 'vue'
+import Datetime from 'vue-datetime'
+import 'vue-datetime/dist/vue-datetime.css'
 
-Vue.use(Datetime);
+Vue.use(Datetime)
 
 export default {
   data () {
@@ -27,5 +26,5 @@ export default {
       datetime12: '2018-05-12T17:19:06.151Z'
     }
   }
-};
+}
 </script>

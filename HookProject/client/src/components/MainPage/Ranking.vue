@@ -10,9 +10,9 @@
             <th scope="col">유저 프로필</th>
           </tr>
         </thead>
-        <tbody v-for="rank in ranks" v-bind:key="rank.id" :rank="rank">
+        <tbody v-for="(rank, index) in ranks" v-bind:key="rank.id" :rank="rank" :ranks="ranks[index]">
           <tr>
-            <th scope="row">1</th>
+            <th scope="row">{{ index + 1 }}</th>
             <td>{{ rank.photo }}</td>
             <td>{{ rank.length }} cm</td>
             <td>{{ rank.name }}</td>
@@ -32,65 +32,54 @@
 </template>
 
 <script>
-import axios from "axios";
+import axios from 'axios'
 
 export default {
-  props: ["rank"],
-  data() {
+  props: ['rank'],
+  data () {
     this.getUser().then(res => {
-      this.name = res.user.name;
-      this.email = res.user.email;
-      this.password = res.user.password;
-      return res;
-    });
-    /*     let contentItems = data.Content.sort((a, b) => {
-      return b.rank.length - a.rank.length;
-    });
-    let items = contentItems.map(contentItem => {
-      return {
-        ...contentItem,
-        user_name: data.User.filter(userItem => {
-          return contentItem.user_id === userItem.user_id;
-        })[0].name
-      };
-    }); */
+      this.name = res.user.name
+      this.email = res.user.email
+      this.password = res.user.password
+      return res
+    })
 
     return {
-      name: "",
-      email: "",
-      password: "",
+      name: '',
+      email: '',
+      password: '',
       ranks: []
-    };
+    }
   },
-  created() {
+  created () {
     axios
-      .get("/api/rank")
+      .get('/api/rank')
       .then(response => {
-        //this.products = response.body
-        //this.products = response
-        this.ranks = response.data;
-        //console.log(response)
-        console.log(response.data);
-        //console.log(response.body)
+        // this.products = response.body
+        // this.products = response
+        this.ranks = response.data
+        // console.log(response)
+        console.log(response.data)
+        // console.log(response.body)
       })
       .catch(err => {
-        console.log(err);
-      });
+        console.log(err)
+      })
   },
   methods: {
-    getUser() {
+    getUser () {
       return axios
-        .get("/api/auth/profile", {
+        .get('/api/auth/profile', {
           headers: { Authorization: `Bearer ${localStorage.usertoken}` }
         })
         .then(res => {
           // console.log(res.data)
-          return res.data;
+          return res.data
         })
         .catch(err => {
-          console.log(err);
-        });
+          console.log(err)
+        })
     }
   }
-};
+}
 </script>
