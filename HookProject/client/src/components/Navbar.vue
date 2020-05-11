@@ -1,15 +1,15 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" style="opacity: 0.9;">
     <button
-      class="navbar-toggler"
-      type="button"
-      data-toggle="collapse"
-      data-target="#navbar1"
-      aria-controls="navbar1"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
+    class="navbar-toggler"
+      pe="button"
+      da-toggle="collapse"
+      da-target="#navbar1"
+      ar-controls="navbar1"
+      ar-expanded="false"
+      ia-label="Toggle navigation"
     >
-      <span class="navbar-toggler-icon"></span>
+    <span class="navbar-toggler-icon"></span>
     </button>
     <div class="justify-content-center">
       <router-link to="/">
@@ -17,9 +17,9 @@
       </router-link>
     </div>
     <div class="collapse navbar-collapse" id="navbar1">
-      <ul class="navbar-nav ml-auto">
-        <li v-if="auth == ''" class="nav-item">
-          <router-link class="nav-link" to="/login">
+    <ul class="navbar-nav ml-auto">
+      <li v-if="auth == ''" class="nav-item">
+        <router-link class="nav-link" to="/login">
             <svg
               class="bi bi-gear-fill"
               width="1.3em"
@@ -98,8 +98,8 @@
           </router-link>
         </li>
 
-        <li v-if="auth == 'loggedin'" class="nav-item">
-          <router-link class="nav-link" to="/notification">
+        <li v-if="auth == 'loggedin' && roles =='2'" class="nav-item">
+          <router-link class="nav-link" to="/approval">
             <svg
               class="bi bi-bell-fill"
               width="1em"
@@ -149,14 +149,14 @@
         <li v-if="auth == 'loggedin'" class="nav-item">
           <router-link class="nav-link" to="/store">Store</router-link>
         </li>
-        <li v-if="auth == 'loggedin'" class="nav-item">
+        <li v-if="auth == 'loggedin' && roles =='1'" class="nav-item">
           <router-link class="nav-link" to="/reservation">Reservation</router-link>
         </li>
-        <li v-if="auth == 'loggedin'" class="nav-item">
-          <router-link class="nav-link" to="/profile">Profile</router-link>
+        <li v-if="auth == 'loggedin' && roles =='2'" class="nav-item">
+          <router-link class="nav-link" to="/approval">Approval</router-link>
         </li>
         <li v-if="auth == 'loggedin'" class="nav-item">
-          <router-link class="nav-link" to="/mypage">Mypage</router-link>
+          <router-link class="nav-link" to="/search">Search</router-link>
         </li>
       </ul>
     </div>

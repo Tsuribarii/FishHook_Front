@@ -149,7 +149,7 @@
       <div class="row">
         <svg
           class="bi bi-calendar"
-          color="#A6A6A6"
+          color="#75A8F2"
           width="1em"
           height="1em"
           viewBox="0 0 16 16"
@@ -242,16 +242,15 @@
         <h4 style="color: #A6A6A6; padding-top: 0.5%; margin-left:3px; margin-right:2%;">취소・환불</h4>
       </div>
       <div class="row">
-        <div style="color: #75A8F2; margin-left:4%; margin-right:4%;">3</div>
-        <div style="color: #A6A6A6; margin-left:5%; margin-right:4%;">0</div>
-        <div style="color: #A6A6A6; margin-left:7%; margin-right:4%;">2</div>
-        <div style="color: #A6A6A6; margin-left:8%; margin-right:4%;">1</div>
+        <div style="color: #75A8F2; margin-left:4%; margin-right:4%;">{{ all }}</div>
+        <div style="color: #A6A6A6; margin-left:5%; margin-right:4%;">{{ reserve }}</div>
+        <div style="color: #A6A6A6; margin-left:7%; margin-right:4%;">{{ complete }}</div>
+        <div style="color: #A6A6A6; margin-left:8%; margin-right:4%;">{{ cancel }}</div>
       </div>
 
       <!-- 든아 여기얌 -->
       <div class="row" style=" position:absolute; right:1%; top:40%;">
         <!-- 예약된 선박 리스트 -->
-        <!-- <UserRental v-for="rental in rentals" v-bind:key="rental.id"></UserRental> -->
         <div
           v-for="rental in rentals"
           v-bind:key="rental.id"
@@ -282,7 +281,7 @@
                     clip-rule="evenodd"
                   />
                 </svg>
-                <h4 style="color: #FAFAFA; padding-top: 2%; margin-left:3px;">이용완료</h4>
+                <h4 style="color: #FAFAFA; padding-top: 2%; margin-left:3px;">{{ rental.status }}</h4>
               </div>
             </div>
           </div>
@@ -290,7 +289,7 @@
           <div class="b" style="background-color:lightgrey; padding:1%;">
             <div style="padding-top:3%;">No. {{ rental.id }}</div>
             <div class="row" style="margin-top:2%; margin-bottom:2%;">
-              <h1>{{ rental.ship_id }}</h1>
+              <h1>{{ rental.name }}</h1>
               <br />
               <svg
                 class="bi bi-three-dots-vertical"
@@ -312,12 +311,12 @@
             <div style="margin-top:2%; margin-bottom:2%;">
               <b style="color: #A6A6A6;">일정</b>
               &nbsp;&nbsp;
-              <b>2020.03.25(수) {{ rental.departure_date }} AM11:00 {{ rental.ship_id }}</b>
+              <b>{{ rental.departure_date }} AM{{ rental.departure_time }}:00</b>
             </div>
             <div style="margin-top:2%; margin-bottom:2%;">
               <b style="color: #A6A6A6;">업체</b>
               &nbsp;&nbsp;
-              <b>은빈이네 선박</b>
+              <b>{{ rental.owner_name }}</b>
             </div>
             <hr />
             <div style="margin-top:2%; margin-bottom:2%;">
@@ -325,7 +324,7 @@
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               <b
                 style="color: #ED0000;"
-              >60,000 so sad... {{ rental.ship_id }} 원</b>
+              >{{ rental.cost }} 원</b>
             </div>
             <!-- 결제금액 -->
           </div>
@@ -342,12 +341,8 @@
 
 <script>
 import axios from 'axios'
-import UserRental from '@/components/UserRental'
 
 export default {
-  components: {
-    UserRental
-  },
   props: ['rental'],
   data () {
     this.getUser().then(res => {
@@ -367,7 +362,11 @@ export default {
       password: '',
       roles: '',
       profile_photo: '',
-      rentals: []
+      rentals: [],
+      all: '',
+      reserve: '',
+      complete: '',
+      cancel: ''
     }
   },
   created () {
@@ -376,12 +375,23 @@ export default {
         headers: { Authorization: `Bearer ${localStorage.usertoken}` }
       })
       .then(response => {
-        // this.products = response.body
-        // this.products = response
         this.rentals = response.data
-        // console.log(response)
         console.log(response.data)
-        // console.log(response.body)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+
+    axios
+      .get('/api/status', {
+        headers: { Authorization: `Bearer ${localStorage.usertoken}` }
+      })
+      .then(response => {
+        console.log(response.data)
+        this.all = response.data.all
+        this.reserve = response.data.reserve
+        this.complete = response.data.complete
+        this.cancel = response.data.cancel
       })
       .catch(err => {
         console.log(err)

@@ -1,14 +1,15 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from '@/components/Home'
+/* import Home from '@/components/Home' */
 import Login from '@/components/Login'
 import Register from '@/components/Register'
 import UserMyPage2 from '@/components/myPage/UserMyPage2'
 import SellerMyPage2 from '@/components/myPage/SellerMyPage2'
 import Information from '@/components/MainPage/Information'
-import Info_re from '@/components/MainPage/InformationResult'
+import InfoRe from '@/components/MainPage/InformationResult'
 import Store from '@/components/MainPage/Store'
 import Reservation from '@/components/MainPage/Reservation'
+import Reservation2 from '@/components/MainPage/Reservation2'
 import Ranking from '@/components/MainPage/Ranking'
 import Community from '@/components/MainPage/Community'
 import Edit from '@/components/MainPage/Community/Edit'
@@ -18,6 +19,8 @@ import Camera from '@/components/MainPage/Camera'
 import Profile from '@/components/Profile'
 import UserMypage from '@/components/UserMyPage'
 import SellerMypage from '@/components/SellerMyPage'
+import Search from '@/components/MainPage/Search'
+import Approval from '@/components/MainPage/Approval'
 
 Vue.use(Router)
 
@@ -60,9 +63,9 @@ export default new Router({
       component: Information
     },
     {
-      path: '/info_re',
-      name: 'info_re',
-      component: Info_re
+      path: '/info_re/:tide',
+      name: 'InfoRe',
+      component: InfoRe
     },
     {
       path: '/store',
@@ -80,6 +83,11 @@ export default new Router({
       component: Reservation
     },
     {
+      path: '/reser_view/:ship',
+      name: 'reservation2',
+      component: Reservation2
+    },
+    {
       path: '/community',
       name: 'community',
       component: Community
@@ -90,7 +98,7 @@ export default new Router({
       component: Create
     },
     {
-      path: '/view',
+      path: '/view/:board',
       name: 'view',
       component: View
     },
@@ -118,6 +126,16 @@ export default new Router({
       path: '/sellermypage',
       name: 'sellermypage',
       component: SellerMypage
+    },
+    {
+      path: '/search',
+      name: 'search',
+      component: Search
+    },
+    {
+      path: '/approval',
+      name: 'approval',
+      component: Approval
     }
   ]
 })

@@ -1,9 +1,32 @@
 <template>
   <div class="container" style="margin-top: 10%;">
-    <div class="row">
+    <div>
+      <router-link
+        :to="'/reservation'"
+        tag="button"
+        class="btn btn-lg btn-outline-secondary1"
+      >선박대여</router-link>
+    </div>
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">날짜</th>
+            <th scope="col">지역</th>
+            <th scope="col">물때</th>
+          </tr>
+        </thead>
+        <tbody v-for="tide in tides" v-bind:key="tide.id" :tide="tide">
+          <tr>
+            <td scope="row">5월 {{ tide.date }}일</td>
+            <td>{{ tide.location }}</td>
+            <td>{{ tide.hide_tide }}</td>
+          </tr>
+        </tbody>
+      </table>
+<!--     <div class="row">
       <svg
         class="bi bi-geo-alt"
-        color="#75a8f2"
+        color="#75a8f2 "
         width="1em"
         height="1em"
         viewBox="0 0 16 16"
@@ -73,10 +96,42 @@
           MAX
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 
 <script>
-export default {}
+import axios from 'axios'
+
+export default {
+  props: ['tide', 'weather'],
+  data () {
+    return {
+      location: '',
+      tides: [],
+      weathers: []
+    }
+  },
+  created () {
+    axios.get('/api/tide/' + this.$route.params.tide)
+      .then(response => {
+        this.tides = response.data
+        console.log(response.data)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+    axios.get('/api/weather/' + this.$route.params.tide)
+      .then(response => {
+        this.weathers = response.data
+        console.log(response.data)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  },
+  methods: {
+
+  }
+}
 </script>

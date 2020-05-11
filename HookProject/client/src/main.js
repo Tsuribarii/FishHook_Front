@@ -17,6 +17,7 @@ import VueScrollTo from 'vue-scrollto'
 import Carousel3d from 'vue-carousel-3d'
 import VueGeolocation from 'vue-browser-geolocation'
 import './registerServiceWorker'
+import moment from 'moment'
 
 require('../node_modules/bootstrap/dist/css/bootstrap.css')
 require('../node_modules/bootstrap-vue/dist/bootstrap-vue.css')
@@ -61,6 +62,9 @@ Vue.use(refresh)
 Vue.use(BootstrapVue)
 Vue.use(VeeValidate)
 Vue.use(cors)
+
+Vue.component('pagination', require('laravel-vue-pagination'))
+Vue.prototype.moment = moment
 
 Vue.config.productionTip = false
 const base = axios.create({

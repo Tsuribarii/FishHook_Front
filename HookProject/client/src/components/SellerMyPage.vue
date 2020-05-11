@@ -146,7 +146,30 @@
 
     <!-- Check -->
     <div v-show="currentTab === 1" class="row" style=" position:absolute; right:30%; top:27%;">
-      <vue-event-calendar :events="demoEvents"></vue-event-calendar>
+      <!-- <vue-event-calendar :events="demoEvents" v-for="rental in rentals"
+          v-bind:key="rental.id"
+          :rental="rental"></vue-event-calendar> -->
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">번호</th>
+                <th scope="col">출발 시간</th>
+                <th scope="col">인수</th>
+                <th scope="col">예약자 이름</th>
+                <th scope="col">승인/취소</th>
+              </tr>
+            </thead>
+            <tbody v-for="(rental, index) in rentals" v-bind:key="rental.id" :rental="rental" :rentals="rentals[index]">
+              <tr>
+                <th scope="row">{{ index + 1 }}</th>
+                <td>{{ rental.departure_date }}</td>
+                <td>{{ rental.number_of_people }}명</td>
+                <td>{{ rental.name }}</td>
+                <td><button type="submit" class="btn btn-lg btn-primary btn-block">승인</button></td>
+                <td><button type="submit" class="btn btn-lg btn-danger btn-block">취소</button></td>
+              </tr>
+            </tbody>
+          </table>
     </div>
   </div>
   <!-- container -->
@@ -154,7 +177,9 @@
 
 <script>
 import axios from 'axios'
+
 export default {
+  props: ['rental'],
   data () {
     this.getUser().then(res => {
       this.name = res.user.name
@@ -168,7 +193,13 @@ export default {
       currentTab: 0,
       tab: null,
       items: ['about', 'check'],
-      demoEvents: [
+      name: '',
+      email: '',
+      password: '',
+      roles: '',
+      profile_photo: '',
+      rentals: []
+      /* demoEvents: [
         {
           date: '2020/03/18', // Required
           title: '은빈이네 선박 AM10:30' // Required
@@ -179,18 +210,26 @@ export default {
           desc: 'description',
           customClass: 'disabled highlight' // Custom classes to an calendar cell
         }
-      ],
-      name: '',
-      email: '',
-      password: '',
-      roles: '',
-      profile_photo: ''
+      ] */
     }
+  },
+  created () {
+    axios
+      .get('/api/mycheck', {
+        headers: { Authorization: `Bearer ${localStorage.usertoken}` }
+      })
+      .then(response => {
+        this.rentals = response.data
+        console.log(response.data)
+      })
+      .catch(err => {
+        console.log(err)
+      })
   },
   methods: {
     getUser () {
       return axios
-        .get('/api/myabout', {
+        .get('/api/auth/profile', {
           headers: { Authorization: `Bearer ${localStorage.usertoken}` }
         })
         .then(res => {
