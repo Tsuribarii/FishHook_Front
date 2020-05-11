@@ -1,15 +1,11 @@
 <template>
   <div class="container">
-    <div style="margin-top:10%;">
+    <div style="margin-top:20%;">
       <div class="card">
-        <div class="card-header">Quote</div>
+        <div class="card-header">{{ board.title }}</div>
         <div class="card-body">
           <blockquote class="blockquote mb-0">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-            <footer class="blockquote-footer">
-              Someone famous in
-              <cite title="Source Title">Source Title</cite>
-            </footer>
+            <p>{{ board.content }}</p>
           </blockquote>
         </div>
       </div>
@@ -24,49 +20,12 @@
 </template>
 
 <script>
-import VueCkeditor from 'vue-ckeditor2'
 import swal from 'sweetalert'
 import axios from 'axios'
 
 export default {
-  components: { VueCkeditor },
   data () {
     return {
-      content: '',
-      config: {
-        toolbar: [
-          { name: 'document', items: ['Source'] },
-          {
-            name: 'basicstyles',
-            items: [
-              'Bold',
-              'Italic',
-              'Underline',
-              'Strike',
-              'Subscript',
-              'Superscript'
-            ]
-          },
-          {
-            name: 'paragraph',
-            items: [
-              'NumberedList',
-              'BulletedList',
-              '-',
-              'JustifyLeft',
-              'JustifyCenter',
-              'JustifyRight',
-              'JustifyBlock'
-            ]
-          },
-          { name: 'links', items: ['Link', 'Unlink'] },
-          { name: 'insert', items: ['Image', 'Table'] },
-          '/',
-          { name: 'styles', items: ['Font', 'FontSize'] },
-          { name: 'colors', items: ['TextColor', 'BGColor'] }
-        ],
-        height: 300
-      },
       board: {}
     }
   },
@@ -74,31 +33,14 @@ export default {
     axios
       .get('/api/show/' + this.$route.params.board)
       .then(response => {
-        this.board = response.data
+        this.board = response.data.board
+        console.log(this.board)
       })
       .catch(err => {
         console.log(err)
       })
   },
   methods: {
-    onBlur (evt) {
-      console.log(evt)
-    },
-    onFocus (evt) {
-      console.log(evt)
-    },
-    onContentDom (evt) {
-      console.log(evt)
-    },
-    onDialogDefinition (evt) {
-      console.log(evt)
-    },
-    onFileUploadRequest (evt) {
-      console.log(evt)
-    },
-    onFileUploadResponse (evt) {
-      console.log(evt)
-    },
     deleteArticle (board) {
       swal(
         {

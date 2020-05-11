@@ -7,42 +7,25 @@
         class="btn btn-lg btn-outline-secondary1"
       >선박대여</router-link>
     </div>
-    <div class="row">
-      <table class="col table">
-          <thead>
-            <tr>
-              <th scope="col">날짜</th>
-              <th scope="col">지역</th>
-              <th scope="col">물때</th>
-            </tr>
-          </thead>
-          <tbody v-for="tide in tides" v-bind:key="tide.id" :tide="tide">
-            <tr>
-              <td scope="row">5월 {{ tide.date }}일</td>
-              <td>{{ tide.location }}</td>
-              <td>{{ tide.hide_tide }}</td>
-            </tr>
-          </tbody>
-        </table>
-        <table class="col table">
-          <thead>
-            <tr>
-              <th scope="col">시간</th>
-              <th scope="col">지역</th>
-              <th scope="col">물때</th>
-              <th scope="col">날씨</th>
-            </tr>
-          </thead>
-          <tbody v-for="weather in weathers" v-bind:key="weather.id" :weather="weather">
-            <tr>
-              <td scope="row">{{ weather.time }}</td>
-              <td>{{ weather.weather_status }}</td>
-              <td>{{ weather.temperature }}</td>
-              <td>{{ weather.wind_direction }}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">시간</th>
+            <th scope="col">지역</th>
+            <th scope="col">물때</th>
+            <th scope="col">날씨</th>
+          </tr>
+        </thead>
+        <tbody v-for="weather in weathers" v-bind:key="weather.id" :weather="weather">
+          <tr>
+            <td scope="row">{{ weather.time }}</td>
+            <td>{{ weather.weather_status }}</td>
+            <td>{{ weather.temperature }}</td>
+            <td>{{ weather.wind_direction }}</td>
+          </tr>
+        </tbody>
+      </table>
 <!--     <div class="row">
       <svg
         class="bi bi-geo-alt"

@@ -15,7 +15,7 @@
               :to="'/view/' + board.id"
             >{{ board.title }}</router-link>
           </td>
-          <td>{{ board.user_name }}</td>
+          <td>{{ board.name }}</td>
           <td>{{ board.hits }}</td>
         </tr>
       </tbody>
