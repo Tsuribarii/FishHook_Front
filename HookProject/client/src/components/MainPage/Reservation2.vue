@@ -6,15 +6,15 @@
         <img :src="ship.ship_image" id="top" width="60%" style="margin-top:1%; margin-right:0;" />
       </div>
       <div class="col">
-        <h2>{{ ship.name }}</h2>
-        <h2>{{ ship.owner_name }}</h2>
-        <h2>{{ ship.location }}</h2>
-        <h2>최대{{ ship.people }}명</h2>
-        <h2>{{ ship.cost }}</h2>
-        <h2>{{ ship.departure_time }}:00</h2>
-        <h2>{{ ship.arrival_time }}:00</h2>
-        <h2>{{ ship.business_time }}</h2>
-        <h2>{{ ship.homepage }}</h2>
+        <h4>{{ ship.name }}</h4>
+        <h4>{{ ship.owner_name }}</h4>
+        <h4>{{ ship.location }}</h4>
+        <h4>최대{{ ship.people }}명</h4>
+        <h4>{{ ship.cost }}</h4>
+        <h4>{{ ship.departure_time }}:00</h4>
+        <h4>{{ ship.arrival_time }}:00</h4>
+        <h4>{{ ship.business_time }}</h4>
+        <h4>{{ ship.homepage }}</h4>
         <h4 style="color: grey;">승선할 날짜를 선택하세요</h4>
         <form v-on:submit.prevent="book">
           <label for="example-input">Choose a date</label>
@@ -85,15 +85,15 @@ export default {
   methods: {
     book () {
       axios
-        .post('/api/rentalstore', {
+        .post('http://13.125.253.47/api/rentalstore', {
           headers: { Authorization: `Bearer ${localStorage.usertoken}` },
-          departure_date: this.departure_date,
+          departure_date: this.ship.departure_date,
           number_of_people: this.ship.people,
           ship_id: this.ship.id
         })
         .then(res => {
           console.log(res)
-          router.push({ name: 'Login' })
+          router.push({ name: 'UserMyPage' })
         })
         .catch(err => {
           console.log(err)

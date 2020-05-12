@@ -1,5 +1,5 @@
 <template>
-  <div style="margin-top:3.8%;">
+  <div style="margin-top:6%;">
         <table class="table">
       <thead>
         <tr>

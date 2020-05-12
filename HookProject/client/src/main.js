@@ -4,7 +4,7 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import refresh from './refresh'
-import BootstrapVue from 'bootstrap-vue'
+/* import BootstrapVue from 'bootstrap-vue' */
 import axios from 'axios'
 import VeeValidate from 'vee-validate'
 import Auth from './packages/auth/Auth.js'
@@ -18,9 +18,15 @@ import Carousel3d from 'vue-carousel-3d'
 import VueGeolocation from 'vue-browser-geolocation'
 import './registerServiceWorker'
 import moment from 'moment'
+import VueCamera from './components/MainPage/Camera.vue'
 
-require('../node_modules/bootstrap/dist/css/bootstrap.css')
-require('../node_modules/bootstrap-vue/dist/bootstrap-vue.css')
+import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
+
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
+
+/* require('../node_modules/bootstrap/dist/css/bootstrap.css')
+require('../node_modules/bootstrap-vue/dist/bootstrap-vue.css') */
 
 Vue.use(VueScrollTo, Carousel3d)
 Vue.config.productionTip = false
@@ -59,9 +65,12 @@ Vue.use(VueGoogleMaps, {
 
 Vue.use(Auth)
 Vue.use(refresh)
-Vue.use(BootstrapVue)
+/* Vue.use(BootstrapVue) */
 Vue.use(VeeValidate)
 Vue.use(cors)
+
+Vue.use(BootstrapVue)
+Vue.use(IconsPlugin)
 
 Vue.component('pagination', require('laravel-vue-pagination'))
 Vue.prototype.moment = moment
@@ -71,6 +80,25 @@ const base = axios.create({
   baseURL: 'http://13.125.253.47'
 })
 Vue.prototype.$http = base
+
+const plugin = {
+  install (Vue) {
+    Vue.component('VueCamera', VueCamera)
+  }
+}
+
+export default VueCamera
+
+// Auto-install
+let GlobalVue = null
+if (typeof window !== 'undefined') {
+  GlobalVue = window.Vue
+} else if (typeof global !== 'undefined') {
+  GlobalVue = global.Vue
+}
+if (GlobalVue) {
+  GlobalVue.use(plugin)
+}
 
 /* eslint-disable no-new */
 new Vue({
