@@ -1,8 +1,7 @@
 <template>
   <div class="container" style="margin-top: 10%;">
     <div class="row">
-      <div class="col" style="margin-left:10%;">
-        <!-- <img src="/static/deunfishing.png" id="top" width="60%" style="margin-top:1%; margin-right:0;" /> -->
+      <!-- <div class="col" style="margin-left:10%;">
         <img :src="ship.ship_image" id="top" width="60%" style="margin-top:1%; margin-right:0;" />
       </div>
       <div class="col">
@@ -15,7 +14,7 @@
         <h4>{{ ship.arrival_time }}:00</h4>
         <h4>{{ ship.business_time }}</h4>
         <h4>{{ ship.homepage }}</h4>
-        <h4 style="color: grey;">승선할 날짜를 선택하세요</h4>
+        <h4 style="color: grey;">승선할 날짜를 선택하세요</h4> -->
         <form v-on:submit.prevent="book">
           <label for="example-input">Choose a date</label>
           <b-input-group class="mb-3">
@@ -46,7 +45,6 @@
               class="form-control"
               name="people"
               placeholder="1"
-              style="width: 10%;"
             />
             명
           </div>

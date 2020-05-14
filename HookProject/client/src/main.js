@@ -9,7 +9,7 @@ import axios from 'axios'
 import VeeValidate from 'vee-validate'
 import Auth from './packages/auth/Auth.js'
 import cors from 'cors'
-import VueMqtt from 'vue-mqtt'
+/* import VueMqtt from 'vue-mqtt' */
 import 'vue-event-calendar/dist/style.css' // ^1.1.10, CSS has been extracted as one file, so you can easily update it.
 import vueEventCalendar from 'vue-event-calendar'
 import * as VueGoogleMaps from 'vue2-google-maps'
@@ -35,7 +35,7 @@ Vue.use(VueGeolocation)
 Vue.use(vueEventCalendar, { locale: 'ko' })
 Vue.use(VueGoogleMaps, {
   load: {
-    key: 'AIzaSyCrt5Q93WKc5EVwZag868ZKN_gmBY0EE70',
+    key: 'AIzaSyA_VoNXdL03NgSGkyvvigId9fSIIikcZII',
     libraries: 'places' // This is required if you use the Autocomplete plugin
     // OR: libraries: 'places,drawing'
     // OR: libraries: 'places,drawing,visualization'
@@ -80,6 +80,8 @@ const base = axios.create({
   baseURL: 'http://13.125.253.47'
 })
 Vue.prototype.$http = base
+
+axios.defaults.headers.common['Content-Type'] = 'application/x-www-form-urlencoded'
 
 const plugin = {
   install (Vue) {

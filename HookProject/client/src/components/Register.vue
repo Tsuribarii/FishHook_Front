@@ -1,10 +1,10 @@
 <template>
-  <div class="container" style="margin-top: 5%">
+  <div class="container" style="margin-top: 3%">
     <div class="row">
       <div class="col-md-6 mt-5 mx-auto">
         <form v-on:submit.prevent="register">
-          <h1 class="h3 mb-3 font-weight-normal">Register</h1>
-          <div class="custom-control custom-radio custom-control-inline">
+          <h1 class="h3 mb-3 font-weight-normal" style="margin-bottom: 10%;">Register</h1>
+          <div class="custom-control custom-radio custom-control-inline" style="margin-bottom: 1%;">
             <input
               type="radio"
               id="1"

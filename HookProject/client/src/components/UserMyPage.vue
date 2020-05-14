@@ -15,7 +15,7 @@
     </div>
     <!-- 이미지업로드 -->
     <div class="row" style="width:28px; display:inline-block;">
-      <div v-if="profile_photo='default.jpg'" class="upload-btn-wrapper">
+      <!-- <div v-if="profile_photo='default.jpg'" class="upload-btn-wrapper">
         <button class="UploadImg">Upload Image</button>
         <input
           style="display:inline;"
@@ -25,9 +25,9 @@
           class="change-profile-image"
           @change="imageChanged"
         />
-      </div>
+      </div> -->
       <!-- 이미지업로드 끝 -->
-      <div v-else>
+      <div>
         <img :src="profile_photo" width="382" height="460" />
       </div>
     </div>
@@ -404,7 +404,7 @@ export default {
           headers: { Authorization: `Bearer ${localStorage.usertoken}` }
         })
         .then(res => {
-          // console.log(res.data)
+          console.log(res.data)
           return res.data
         })
         .catch(err => {

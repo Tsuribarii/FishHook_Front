@@ -1,27 +1,23 @@
 <template>
   <div class="container">
-    <table class="table" style="margin-top:15%;">
-      <thead>
-        <tr>
-          <th scope="col">이름</th>
-          <th scope="col">위치</th>
-          <th scope="col">전화번호</th>
-          <th scope="col">홈페이지</th>
-          <th scope="col">어종 사진</th>
-          <th scope="col">가격</th>
-        </tr>
-      </thead>
-      <tbody v-for="search in searches" v-bind:key="search.id" :search="search">
-        <tr>
-          <td scope="row">{{ search.place_name }}</td>
-          <td>{{ search.location }}</td>
-          <td>{{ search.phone_number }}</td>
-          <td>{{ search.homepage }}</td>
-          <td><img :src="search.main_fish_image[0]" alt=""></td>
-          <td>{{ search.price }}</td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="row" style="margin-top:6%; margin-left: 8%;">
+      <div v-for="search in searches" v-bind:key="search.id" :search="search" style="margin-left: 2%; margin-bottom: 2%;">
+        <b-card-group deck></b-card-group>
+          <b-card
+            :header="search.place_name"
+            header-tag="header"
+            :title="search.place_name"
+          >
+            <b-card-text>Header and footers using props.</b-card-text>
+            <a
+                v-bind:href="search.homepage"
+                tag="button"
+                class="btn btn-lg btn-outline-secondary1 btn-block"
+              >Go homepage</a>
+          </b-card>
+        </b-card-group>
+      </div>
+    </div>
   </div>
 </template>
 

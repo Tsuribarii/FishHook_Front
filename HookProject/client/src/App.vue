@@ -50,4 +50,16 @@ export default {
   background-color: #93c3f3;
   color: black;
 }
+
+.view {
+  color: black;
+}
+.view:visited {
+  color: black;
+  text-decoration: none;
+}
+.view:hover {
+  color: #75A8F2;
+  text-decoration: none;
+}
 </style>

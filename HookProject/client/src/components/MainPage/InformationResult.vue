@@ -1,19 +1,13 @@
 <template>
-  <div class="container" style="margin-top: 10%;">
-    <div>
-      <router-link
-        :to="'/reservation'"
-        tag="button"
-        class="btn btn-lg btn-outline-secondary1"
-      >선박대여</router-link>
-    </div>
+  <div class="container" style="margin-top: 2%;">
+
     <div class="row">
-      <table class="col table">
+      <table class="col table" style="text-align:center;">
           <thead>
             <tr>
-              <th scope="col">날짜</th>
-              <th scope="col">지역</th>
-              <th scope="col">물때</th>
+              <th scope="col" style="border:none">날짜</th>
+              <th scope="col" style="border:none">지역</th>
+              <th scope="col" style="border:none">물때</th>
             </tr>
           </thead>
           <tbody v-for="tide in tides" v-bind:key="tide.id" :tide="tide">
@@ -24,13 +18,14 @@
             </tr>
           </tbody>
         </table>
-        <table class="col table">
+        <div style=" height:445px; overflow:hidden;">
+        <table class="col table" style="text-align:center;">
           <thead>
             <tr>
-              <th scope="col">시간</th>
-              <th scope="col">지역</th>
-              <th scope="col">물때</th>
-              <th scope="col">날씨</th>
+              <th scope="col" style="border:none">시간</th>
+              <th scope="col" style="border:none">지역</th>
+              <th scope="col" style="border:none">물때</th>
+              <th scope="col" style="border:none">날씨</th>
             </tr>
           </thead>
           <tbody v-for="weather in weathers" v-bind:key="weather.id" :weather="weather">
@@ -42,6 +37,7 @@
             </tr>
           </tbody>
         </table>
+        </div>
       </div>
 <!--     <div class="row">
       <svg
@@ -117,6 +113,14 @@
         </div>
       </div>
     </div> -->
+
+    <div style="margin-left:85%">
+      <router-link
+        :to="'/reservation'"
+        tag="button"
+        class="btn btn-lg btn-outline-secondary1"
+      >선박대여</router-link>
+    </div>
   </div>
 </template>
 

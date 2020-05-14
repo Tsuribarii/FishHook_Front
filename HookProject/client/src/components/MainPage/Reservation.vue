@@ -1,40 +1,37 @@
 <template>
   <div class="container">
-    <div class="row" style="margin-top:15%;">
-      <h2 >Reservation</h2>
+    <div class="row" style="margin-top: 7%; margin-bottom: 1%;">
+      <!-- <h2 >Reservation</h2> -->
     </div>
-    <table class="table">
-      <thead>
-        <tr>
-          <th scope="col">사진</th>
-          <th scope="col">배 이름</th>
-          <th scope="col">업체 이름</th>
-          <th scope="col">사진</th>
-          <th scope="col">출발시간</th>
-          <th scope="col">도착시간</th>
-          <th scope="col">인수</th>
-          <th scope="col">가격</th>
-        </tr>
-      </thead>
-      <tbody v-for="ship in laravelData.data" :key="ship.id">
-        <tr>
-          <img :src="ship.ship_image" alt="">
-          <td scope="row">
+    <div class="row" style="margin-left: 0.5%;">
+      <div v-for="ship in laravelData.data" :key="ship.id">
+        <b-card-group deck style="width: 90%;">
+          <b-card
+            :title="ship.name"
+            :img-src="ship.ship_image"
+            img-alt="Image"
+            img-top
+            tag="article"
+            style="max-width: 25rem;"
+            class="mb-2"
+          >
+            <b-card-sub-title>
+              {{ ship.owner_name}}
+            </b-card-sub-title>
+            <b-card-text>
+              {{ ship.departure_time }}:00 ~ {{ ship.arrival_time }}:00<br />
+              {{ ship.cost }}원
+            </b-card-text>
             <router-link
               :to="'/reser_view/' + ship.id"
-            >{{ ship.name }}</router-link>
-          </td>
-          <td>{{ ship.owner_name }}</td>
-          <td>{{ ship.ship_image }}</td>
-          <td>{{ ship.departure_time }}:00</td>
-          <td>{{ ship.arrival_time }}:00</td>
-          <td>{{ ship.people }}명</td>
-          <td>{{ ship.cost }}원</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <pagination :data="laravelData" @pagination-change-page="getResults"></pagination>
+              tag="button"
+              class="btn btn-lg btn-outline-secondary1 btn-block"
+            >Reservation</router-link>
+          </b-card>
+        </b-card-group>
+      </div>
+    </div>
+    <pagination :data="laravelData" @pagination-change-page="getResults" class="justify-content-md-center"></pagination>
   </div>
 </template>
 

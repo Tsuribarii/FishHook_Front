@@ -1,30 +1,35 @@
 <template>
-  <div style="margin-top:6%;">
-        <table class="table">
-      <thead>
-        <tr>
-          <th scope="col">제목</th>
-          <th scope="col">이름</th>
-          <th scope="col">조회수</th>
-        </tr>
-      </thead>
-      <tbody v-for="board in laravelData.data" :key="board.id">
-        <tr>
-          <td scope="row">
-            <router-link
-              :to="'/view/' + board.id"
-            >{{ board.title }}</router-link>
-          </td>
-          <td>{{ board.name }}</td>
-          <td>{{ board.hits }}</td>
-        </tr>
-      </tbody>
-    </table>
+  <div class="container">
+    <div style="margin-top:2%;">
+      <table class="table" style="text-align:center;">
+        <thead>
+          <tr>
+            <th scope="col" style="border:none">번호</th>
+            <th scope="col" style="border:none">제목</th>
+            <th scope="col" style="border:none">이름</th>
+            <th scope="col" style="border:none">조회수</th>
+          </tr>
+        </thead>
+        <tbody v-for="(board, index) in laravelData.data" :key="board.id" :laravelData="laravelData[index]">
+          <tr>
+            <th>{{ index + 1 }}</th>
+            <td scope="row">
+              <router-link
+                :to="'/view/' + board.id"
+                class="view"
+              >{{ board.title }}</router-link>
+            </td>
+            <td>{{ board.name }}</td>
+            <td>{{ board.hits }}</td>
+          </tr>
+        </tbody>
+      </table>
 
-    <pagination :data="laravelData" @pagination-change-page="getResults"></pagination>
+      <pagination :data="laravelData" @pagination-change-page="getResults" class="justify-content-md-center"></pagination>
 
-    <div class="form-group" style="margin-top: 10%;">
-      <router-link to="/create" tag="button" class="btn btn-lg btn-outline-secondary1">Create</router-link>
+      <!-- <div class="form-group" style="margin-top: 10%;">
+        <router-link to="/create" tag="button" class="btn btn-lg btn-outline-secondary1">Create</router-link>
+      </div> -->
     </div>
   </div>
 </template>
@@ -56,3 +61,17 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+  .view {
+    color: black;
+  }
+  .view:visited {
+    color: black;
+    text-decoration: none;
+  }
+  .view:hover {
+    color: #75A8F2;
+    text-decoration: none;
+  }
+</style>

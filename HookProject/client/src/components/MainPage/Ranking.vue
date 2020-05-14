@@ -1,18 +1,18 @@
 <template>
   <div class="container">
-    <div style="margin-top:6%;">
-      <table class="table">
+    <div style="margin-top:2%;">
+      <table class="table" style="text-align:center;">
         <thead>
           <tr>
-            <th scope="col">순위</th>
-            <th scope="col">물고기 사진</th>
-            <th scope="col">cm</th>
-            <th scope="col">유저 프로필</th>
+            <th scope="col" style="border:none">순위</th>
+            <th scope="col" style="border:none">물고기 사진</th>
+            <th scope="col" style="border:none">cm</th>
+            <th scope="col" style="border:none">유저 프로필</th>
           </tr>
         </thead>
         <tbody v-for="(rank, index) in ranks" v-bind:key="rank.id" :rank="rank" :ranks="ranks[index]">
           <tr>
-            <th scope="row">{{ index + 1 }}</th>
+            <th scope="row" >{{ index + 1 }}</th>
             <td>{{ rank.photo }}</td>
             <td>{{ rank.length }} cm</td>
             <td>{{ rank.name }}</td>
@@ -20,11 +20,12 @@
         </tbody>
       </table>
     </div>
-    <div class="form-group" style="margin-top: 10%;">
+    <div class="form-group" style="margin-top: 1%;">
       <router-link
         to="/camera"
         tag="button"
         class="btn btn-lg btn-outline-secondary1"
+        style="margin-left:90%"
         >Camera</router-link
       >
     </div>

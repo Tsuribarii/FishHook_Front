@@ -6,10 +6,8 @@ export default function (Vue) {
   Vue.refresh = {
     checktoken () {
       axios
-        .get('/api/auth/profile/', {
-          headers: {
-            Authorization: `Bearer ${localStorage.usertoken}`
-          }
+        .get('/api/auth/profile', {
+          headers: { Authorization: `Bearer ${localStorage.usertoken}` }
         })
         .then(res => {
           console.log(res)

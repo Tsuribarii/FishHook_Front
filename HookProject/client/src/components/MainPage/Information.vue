@@ -1,19 +1,22 @@
 <template>
-  <div class="row container">
-    <div>
-      <img src="/static/info_map.png" id="top" width="20%" style="margin-top:15%;" />
-      <img
+  <div class="container">
+    <h5 style="margin-top:4%; text-align:center; font-size:2rem; font-family: 'Quicksand', sans-serif;" >&rtrif;
+Please click the area  &ltrif;</h5>
+    <div class="col"  style="display:inline-block; margin-top:4%;">
+
+      <!-- <img src="/static/info_map.png" id="top" width="10%" /> -->
+<!-- <img
         id="bigpic"
         src="bigpic"
         width="15%"
         style="display:none;  z-index:10; position:absolute; top:15%;"
-      />
-    </div>
+      /> -->
 
-    <!-- 여기부터 첫째장 -->
-    <div v-show="currentTab === 0" style="margin-top: 15%;">
+      <!-- 여기부터 첫째장 -->
+    <div class="col" style="margin-right:0; display:inline-block;">
+    <div v-show="currentTab === 0" >
       <!-- 첫째줄 -->
-      <div class="btn-group" v-for="(tide, index) in tides"
+      <div class="btn-group col-sm-4" v-for="(tide, index) in tides"
         v-bind:key="tide.id"
         :tide="tide"
         :tides="tides[index]">
@@ -21,6 +24,7 @@
             :to="'/info_re/' + tide.id"
             tag="button"
             class="col-sm btn btn-lg btn-outline-secondary2"
+            style="width:13rem; margin-right:1rem; margin-bottom:1rem;"
           >{{ tide.location }}</router-link>
       </div>
       <!-- <div
@@ -36,6 +40,7 @@
         >{{ tide.location }}</button>
         <div class="w-100"></div>
       </div> -->
+    </div>
     </div>
 
     <!-- 여기부터 둘째장 -->
@@ -55,8 +60,13 @@
       >{{ item }}</div>
     </div> -->
     <!-- 전체 레이아웃 -->
+    </div>
   </div>
 </template>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Slab:wght@100&family=Quicksand&family=Tangerine:wght@700&display=swap');
+</style>
 
 <script>
 import axios from 'axios'
@@ -70,6 +80,7 @@ export default {
       items: ['←', '→'],
       location: '',
       tides: []
+
     }
   },
   created () {
