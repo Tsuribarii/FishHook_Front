@@ -1,6 +1,12 @@
 <template>
   <div id="app">
-    <navbar></navbar>
+    <navbar
+    v-show="
+        $route.path === '/login' ||
+        $route.path === '/register'
+          ? false
+          : true
+      "></navbar>
     <router-view />
     <bottom></bottom>
   </div>

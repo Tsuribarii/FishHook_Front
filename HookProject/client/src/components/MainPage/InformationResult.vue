@@ -2,7 +2,7 @@
   <div class="container" style="margin-top: 2%;">
 
     <div class="row">
-      <table class="col table" style="text-align:center;">
+      <table class="col table" style="text-align:center; font-family: 'Nanum Gothic', sans-serif;">
           <thead>
             <tr>
               <th scope="col" style="border:none">날짜</th>
@@ -153,3 +153,6 @@ export default {
   }
 }
 </script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Noto+Serif+KR:wght@300&display=swap');
+</style>

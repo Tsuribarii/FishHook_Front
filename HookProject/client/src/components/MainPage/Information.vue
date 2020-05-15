@@ -24,7 +24,7 @@ Please click the area  &ltrif;</h5>
             :to="'/info_re/' + tide.id"
             tag="button"
             class="col-sm btn btn-lg btn-outline-secondary2"
-            style="width:13rem; margin-right:1rem; margin-bottom:1rem;"
+            style="width:13rem; margin-right:1rem; margin-bottom:1rem; font-family: 'Nanum Gothic', sans-serif;, serif;"
           >{{ tide.location }}</router-link>
       </div>
       <!-- <div
@@ -66,6 +66,7 @@ Please click the area  &ltrif;</h5>
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Josefin+Slab:wght@100&family=Quicksand&family=Tangerine:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Noto+Serif+KR:wght@300&display=swap');
 </style>
 
 <script>

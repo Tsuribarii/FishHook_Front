@@ -1,31 +1,33 @@
 <template>
   <div class="container">
     <div style="margin-top:2%;">
-      <table class="table" style="text-align:center;">
+      <table class="table" style="text-align:center; font-family: 'Nanum Gothic', sans-serif;">
         <thead>
           <tr>
             <th scope="col" style="border:none">순위</th>
             <th scope="col" style="border:none">물고기 사진</th>
             <th scope="col" style="border:none">cm</th>
-            <th scope="col" style="border:none">유저 프로필</th>
+            <th scope="col" style="border:none">유저 이름</th>
           </tr>
         </thead>
-        <tbody v-for="(rank, index) in ranks" v-bind:key="rank.id" :rank="rank" :ranks="ranks[index]">
+        <tbody v-for="(rank, index) in rankData.data" :key="rank.id" :rankData="rankData[index]">
           <tr>
-            <th scope="row" >{{ index + 1 }}</th>
-            <td>{{ rank.photo }}</td>
-            <td>{{ rank.length }} cm</td>
-            <td>{{ rank.name }}</td>
+            <th scope="row" style="line-height:6rem;">{{ index + 1 }}</th>
+            <th><img :src="rank.photo"  style="width:20%; padding:1%;"/></th>
+            <td style="line-height:6rem;">{{ rank.length }} cm</td>
+            <td style="line-height:6rem;">{{ rank.name }}</td>
           </tr>
         </tbody>
       </table>
     </div>
+
+    <pagination :data="rankData" @pagination-change-page="getResults" class="justify-content-md-center" style="margin-top: 3%;"></pagination>
     <div class="form-group" style="margin-top: 1%;">
       <router-link
         to="/camera"
         tag="button"
         class="btn btn-lg btn-outline-secondary1"
-        style="margin-left:90%"
+        style="position:absolute; top:85%; right:22%;"
         >Camera</router-link
       >
     </div>
@@ -36,7 +38,6 @@
 import axios from 'axios'
 
 export default {
-  props: ['rank'],
   data () {
     this.getUser().then(res => {
       this.name = res.user.name
@@ -49,23 +50,13 @@ export default {
       name: '',
       email: '',
       password: '',
-      ranks: []
+      rankData: {}
     }
   },
   created () {
-    axios
-      .get('/api/rank')
-      .then(response => {
-        // this.products = response.body
-        // this.products = response
-        this.ranks = response.data
-        // console.log(response)
-        console.log(response.data)
-        // console.log(response.body)
-      })
-      .catch(err => {
-        console.log(err)
-      })
+  },
+  mounted () {
+    this.getResults()
   },
   methods: {
     getUser () {
@@ -80,7 +71,21 @@ export default {
         .catch(err => {
           console.log(err)
         })
+    },
+    getResults (page = 1) {
+      axios.get('/api/rank?page=' + page)
+        .then(response => {
+          this.rankData = response.data
+          console.log(this.rankData)
+        })
+        .catch(err => {
+          console.log(err)
+          console.log(err.response)
+        })
     }
   }
 }
 </script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Noto+Serif+KR:wght@300&display=swap');
+</style>

@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div style="margin-top:2%;">
-      <table class="table" style="text-align:center;">
+      <table class="table" style="text-align:center; margin-bottom: 3%; font-family: 'Nanum Gothic', sans-serif;">
         <thead>
           <tr>
             <th scope="col" style="border:none">번호</th>
@@ -48,7 +48,7 @@ export default {
   },
   methods: {
     getResults (page = 1) {
-      axios.get('api/list?page=' + page)
+      axios.get('/api/list?page=' + page)
         .then(response => {
           this.laravelData = response.data
           console.log(this.laravelData)
@@ -63,6 +63,7 @@ export default {
 </script>
 
 <style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Noto+Serif+KR:wght@300&display=swap');
   .view {
     color: black;
   }

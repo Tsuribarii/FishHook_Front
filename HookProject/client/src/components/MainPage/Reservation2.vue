@@ -1,11 +1,12 @@
 <template>
-  <div class="container" style="margin-top: 10%;">
+  <div class="container" style="margin-top: 7%;">
     <div class="row">
-      <!-- <div class="col" style="margin-left:10%;">
-        <img :src="ship.ship_image" id="top" width="60%" style="margin-top:1%; margin-right:0;" />
+      <div class="col" style="margin-left:10%;">
+        <img :src="ship.ship_image" id="top" width="90%" style="margin-top:1%; margin-right:0; margin-bottom: 3%;" />
+        <div class="justify-content-md-center" style="font-family: 'Nanum Gothic', sans-serif;"><h2>{{ ship.name }}</h2></div>
       </div>
-      <div class="col">
-        <h4>{{ ship.name }}</h4>
+      <div class="col" style="font-family: 'Nanum Gothic', sans-serif;">
+        <!-- <h4>{{ ship.name }}</h4>
         <h4>{{ ship.owner_name }}</h4>
         <h4>{{ ship.location }}</h4>
         <h4>최대{{ ship.people }}명</h4>
@@ -15,7 +16,7 @@
         <h4>{{ ship.business_time }}</h4>
         <h4>{{ ship.homepage }}</h4>
         <h4 style="color: grey;">승선할 날짜를 선택하세요</h4> -->
-        <form v-on:submit.prevent="book">
+        <form v-on:submit.prevent="book" style="margin-top: 8.5%;">
           <label for="example-input">Choose a date</label>
           <b-input-group class="mb-3">
             <b-form-input
@@ -37,16 +38,19 @@
               ></b-form-datepicker>
             </b-input-group-append>
           </b-input-group>
-          <div class="row form-group" style="margin-top: 2%;">
-            <label for="email">인수</label>
-            <input
-              type="text"
-              v-model="ship.people"
-              class="form-control"
-              name="people"
-              placeholder="1"
-            />
-            명
+          <div class="form-group" style="margin-top: 2%;">
+            <label for="text">People</label>
+            <div class="row">
+              <input
+                type="text"
+                v-model="ship.people"
+                class="form-control"
+                name="people"
+                placeholder="1"
+                style="width: 10%; margin-left: 3%;"
+              />
+              명
+            </div>
           </div>
           <button type="submit" class="btn btn-lg btn-primary1 btn-block">Reservation</button>
         </form>
@@ -84,14 +88,14 @@ export default {
     book () {
       axios
         .post('http://13.125.253.47/api/rentalstore', {
-          headers: { Authorization: `Bearer ${localStorage.usertoken}` },
+          token: localStorage.usertoken,
           departure_date: this.ship.departure_date,
           number_of_people: this.ship.people,
           ship_id: this.ship.id
         })
         .then(res => {
           console.log(res)
-          router.push({ name: 'UserMyPage' })
+          router.push({ name: 'Home' })
         })
         .catch(err => {
           console.log(err)
@@ -106,3 +110,6 @@ export default {
   }
 }
 </script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Noto+Serif+KR:wght@300&display=swap');
+</style>

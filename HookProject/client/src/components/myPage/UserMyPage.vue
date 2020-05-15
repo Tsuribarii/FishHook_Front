@@ -9,7 +9,7 @@
         <div class="tabs">
           <div
             class="tab"
-            style="display:inline; font-size:1.3rem; margin-right:5%;"
+            style="display:inline; font-size:1.3rem; margin-right:5%; font-family: 'Nanum Gothic', sans-serif;"
             v-for="(item, index) in items"
             :class="{ active: currentTab === index }"
             @click="currentTab = index"
@@ -177,4 +177,6 @@ export default {
 .tab:hover {
   color: #6185f3;
 }
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Noto+Serif+KR:wght@300&display=swap');
+
 </style>

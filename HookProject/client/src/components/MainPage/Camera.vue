@@ -1,10 +1,37 @@
 <template>
   <div class="container" style="margin-top: 10%;">
     <!-- 이미지업로드 -->
-    <form @submit.prevent="analyze">
+    <form @submit.prevent="analyze" enctype="multipart/form-data">
+      <div class="form-group" style="margin-top: 2%;">
+        <label for="text">location</label>
+        <div class="row">
+          <input
+            type="text"
+            v-model="location"
+            class="form-control"
+            name="location"
+            placeholder="1"
+            style="width: 10%; margin-left: 3%;"
+          />
+        </div>
+      </div>
+      <div class="form-group" style="margin-top: 2%;">
+        <label for="text">length</label>
+        <div class="row">
+          <input
+            type="text"
+            v-model="length"
+            class="form-control"
+            name="length"
+            placeholder="1"
+            style="width: 10%; margin-left: 3%;"
+          />
+          cm
+        </div>
+      </div>
       <div class="input-group">
         <div class="custom-file">
-          <input type="file" @change="imageChanged" class="custom-file-input" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04">
+          <input type="file" @change="imageChanged" class="custom-file-input" name="image" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04">
           <label class="custom-file-label" for="inputGroupFile04">Choose file</label>
         </div>
         <div class="input-group-append">
@@ -13,7 +40,7 @@
       </div>
     </form>
 <!-- 숨겨진 카메라 -->
-    <!-- <div class="row">
+    <div class="row">
       <div class="col-md-6">
         <h2>Current Camera</h2>
         <code v-if="device">{{ device.label }}</code>
@@ -54,7 +81,7 @@
             <img :src="img" class="img-responsive" />
         </figure>
       </div>
-    </div> -->
+    </div>
   </div>
 </template>
 
@@ -72,7 +99,9 @@ export default {
       camera: null,
       deviceId: null,
       devices: [],
-      photo: ''
+      image: '',
+      length: '',
+      location: ''
     }
   },
   computed: {
@@ -123,14 +152,16 @@ export default {
       var fileReader = new FileReader()
       fileReader.readAsDataURL(e.target.files[0])
       fileReader.onload = (e) => {
-        this.photo = e.target.result
+        this.image = e.target.result
       }
     },
     analyze () {
       return axios
-        .post('/api/auth/profile', {
-          headers: { Authorization: `Bearer ${localStorage.usertoken}` },
-          photo: this.photo
+        .post('http://13.125.253.47/api/rank/store', {
+          token: localStorage.usertoken,
+          image: this.image,
+          length: this.length,
+          location: this.location
         })
         .then(res => {
           console.log(res.data)
