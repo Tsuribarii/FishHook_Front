@@ -167,8 +167,8 @@
                 <td>{{ rental.departure_date }}</td>
                 <td>{{ rental.number_of_people }}명</td>
                 <td>{{ rental.name }}</td>
-                <td><button type="submit" class="btn btn-outline-primary btn-block">승인</button></td>
-                <td><button type="submit" class="btn btn-outline-danger btn-block">취소</button></td>
+                <td><button type="submit" class="btn btn-outline-primary btn-block" @click="confirm(rental.id, index)">승인</button></td>
+                <td><button class="btn btn-outline-danger btn-block" @click="removeRow(index)">취소</button></td>
               </tr>
             </tbody>
           </table>
@@ -218,7 +218,7 @@ export default {
   },
   created () {
     axios
-      .get('/api/mycheck', {
+      .get('/api/apply', {
         headers: { Authorization: `Bearer ${localStorage.usertoken}` }
       })
       .then(response => {
@@ -272,6 +272,20 @@ export default {
             console.log(err.response)
           })
       })
+    },
+    confirm (id, index) {
+      axios
+        .post('http://13.125.253.47/api/confirm', {id: id})
+        .then(res => {
+          console.log(res)
+          this.rentals.splice(index, 1)
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    removeRow (index) {
+      this.rentals.splice(index, 1)
     }
   }
 }

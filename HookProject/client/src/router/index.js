@@ -3,14 +3,13 @@ import Router from 'vue-router'
 /* import Home from '@/components/Home' */
 import Login from '@/components/Login'
 import Register from '@/components/Register'
-import UserMyPage2 from '@/components/myPage/UserMyPage2'
-import SellerMyPage2 from '@/components/myPage/SellerMyPage2'
 import Information from '@/components/MainPage/Information'
 import InfoRe from '@/components/MainPage/InformationResult'
 import Store from '@/components/MainPage/Store'
 import Reservation from '@/components/MainPage/Reservation'
 import Reservation2 from '@/components/MainPage/Reservation2'
 import Ranking from '@/components/MainPage/Ranking'
+import RankRegister from '@/components/MainPage/RankRegister'
 import Community from '@/components/MainPage/Community'
 import Edit from '@/components/MainPage/Community/Edit'
 import View from '@/components/MainPage/Community/View'
@@ -48,18 +47,8 @@ export default new Router({
       component: Register
     },
     {
-      path: '/usermypage2',
-      name: 'UserMyPage2',
-      component: UserMyPage2
-    },
-    {
-      path: '/sellermypage2',
-      name: 'SellerMyPage2',
-      component: SellerMyPage2
-    },
-    {
       path: '/information',
-      name: 'information',
+      name: 'Information',
       component: Information
     },
     {
@@ -69,73 +58,78 @@ export default new Router({
     },
     {
       path: '/store',
-      name: 'store',
+      name: 'Store',
       component: Store
     },
     {
       path: '/ranking',
-      name: 'ranking',
+      name: 'Ranking',
       component: Ranking
     },
     {
+      path: '/rankregister',
+      name: 'Rankregister',
+      component: RankRegister
+    },
+    {
       path: '/reservation',
-      name: 'reservation',
+      name: 'Reservation',
       component: Reservation
     },
     {
       path: '/reser_view/:ship',
-      name: 'reservation2',
+      name: 'Reservation2',
       component: Reservation2
     },
     {
       path: '/community',
-      name: 'community',
+      name: 'Community',
       component: Community
     },
     {
       path: '/create',
-      name: 'create',
+      name: 'Create',
       component: Create
     },
     {
       path: '/view/:board',
-      name: 'view',
+      name: 'View',
       component: View
     },
     {
       path: '/edit',
-      name: 'edit',
+      name: 'Edit',
       component: Edit
     },
     {
       path: '/camera',
-      name: 'camera',
+      name: 'Camera',
       component: Camera
     },
     {
       path: '/profile',
-      name: 'profile',
+      name: 'Profile',
       component: Profile
     },
     {
       path: '/usermypage',
-      name: 'usermypage',
+      name: 'Usermypage',
       component: UserMypage
     },
     {
       path: '/sellermypage',
-      name: 'sellermypage',
+      name: 'Sellermypage',
       component: SellerMypage
     },
     {
       path: '/search',
-      name: 'search',
+      name: 'Search',
       component: Search
     },
     {
       path: '/approval',
-      name: 'approval',
+      name: 'Approval',
       component: Approval
-    },
+    }
   ]
 })

@@ -95,7 +95,7 @@ export default {
         })
         .then(res => {
           console.log(res)
-          router.push({ name: 'Home' })
+          router.push({ name: 'Usermypage' })
         })
         .catch(err => {
           console.log(err)
