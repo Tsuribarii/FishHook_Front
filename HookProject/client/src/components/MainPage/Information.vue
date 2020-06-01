@@ -86,7 +86,7 @@ export default {
   },
   created () {
     axios
-      .post('/api/tide/index')
+      .post('http://15.165.203.24/api/tide/index')
       .then(response => {
         this.tides = response.data
         console.log(response.data)

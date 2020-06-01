@@ -116,7 +116,7 @@ export default {
     }
   },
   created () {
-    axios.get('/api/tide/' + this.$route.params.tide)
+    axios.get('http://15.165.203.24/api/tide/' + this.$route.params.tide)
       .then(response => {
         this.tides = response.data[0]
         this.weathers = response.data[1]

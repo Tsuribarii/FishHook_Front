@@ -20,7 +20,7 @@
     <ul class="navbar-nav w-100 justify-content-center px-3">
       <li class="nav-item active">
         <router-link to="/" class="nav-link">
-          <img src="/static/logo_mini.png" alt /><span class="sr-only">(current)</span>
+          <img src="/img/logo_mini.png" alt /><span class="sr-only">(current)</span>
         </router-link>
       </li>
     </ul>
@@ -91,7 +91,7 @@ export default {
     },
     getUser () {
       return axios
-        .get('/api/auth/profile', {
+        .get('http://15.165.203.24/api/auth/profile', {
           headers: { Authorization: `Bearer ${localStorage.usertoken}` }
         })
         .then(res => {

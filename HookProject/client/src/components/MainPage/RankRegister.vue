@@ -67,7 +67,7 @@ export default {
   },
   created () {
     axios
-      .get('/api/image')
+      .get('http://15.165.203.24/api/image')
       .then(response => {
         this.analyzes = response.data
         console.log(response.data)
@@ -79,7 +79,7 @@ export default {
   methods: {
     getUser () {
       return axios
-        .get('/api/auth/profile', {
+        .get('http://15.165.203.24/api/auth/profile', {
           headers: { Authorization: `Bearer ${localStorage.usertoken}` }
         })
         .then(res => {

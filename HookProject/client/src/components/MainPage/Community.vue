@@ -48,7 +48,7 @@ export default {
   },
   methods: {
     getResults (page = 1) {
-      axios.get('/api/list?page=' + page)
+      axios.get('http://15.165.203.24/api/list?page=' + page)
         .then(response => {
           this.laravelData = response.data
           console.log(this.laravelData)

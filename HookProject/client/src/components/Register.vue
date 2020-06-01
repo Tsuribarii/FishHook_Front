@@ -89,7 +89,7 @@ export default {
   methods: {
     register () {
       axios
-        .post('/api/auth/register', {
+        .post('http://15.165.203.24/api/auth/register', {
           roles: this.roles,
           name: this.name,
           email: this.email,

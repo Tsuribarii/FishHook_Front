@@ -37,7 +37,7 @@ export default {
   methods: {
     getUser () {
       return axios
-        .get('/api/auth/profile', {
+        .get('http://15.165.203.24/api/auth/profile', {
           headers: { Authorization: `Bearer ${localStorage.usertoken}` }
         })
         .then(res => {

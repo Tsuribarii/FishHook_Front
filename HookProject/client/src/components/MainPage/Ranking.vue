@@ -61,7 +61,7 @@ export default {
   methods: {
     getUser () {
       return axios
-        .get('/api/auth/profile', {
+        .get('http://15.165.203.24/api/auth/profile', {
           headers: { Authorization: `Bearer ${localStorage.usertoken}` }
         })
         .then(res => {
@@ -73,7 +73,7 @@ export default {
         })
     },
     getResults (page = 1) {
-      axios.get('/api/rank?page=' + page)
+      axios.get('http://15.165.203.24/api/rank?page=' + page)
         .then(response => {
           this.rankData = response.data
           console.log(this.rankData)

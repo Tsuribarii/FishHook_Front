@@ -1,6 +1,6 @@
 import Vue from 'vue'
-import Router from 'vue-router'
-/* import Home from '@/components/Home' */
+import VueRouter from 'vue-router'
+/* import Home from '../views/Home.vue' */
 import Login from '@/components/Login'
 import Register from '@/components/Register'
 import Information from '@/components/MainPage/Information'
@@ -21,16 +21,14 @@ import SellerMypage from '@/components/SellerMyPage'
 import Search from '@/components/MainPage/Search'
 import Approval from '@/components/MainPage/Approval'
 
-Vue.use(Router)
+Vue.use(VueRouter)
 
 const isToken = (to, from, next) => {
   if (localStorage.getItem('userToken')) {
   }
 }
 
-export default new Router({
-  mode: 'history',
-  routes: [
+  const routes = [
     {
       path: '/',
       name: 'Home',
@@ -131,5 +129,12 @@ export default new Router({
       name: 'Approval',
       component: Approval
     }
-  ]
+]
+
+const router = new VueRouter({
+  mode: 'history',
+  base: process.env.BASE_URL,
+  routes
 })
+
+export default router

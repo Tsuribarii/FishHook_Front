@@ -330,7 +330,7 @@ export default {
   },
   created () {
     axios
-      .get('/api/mycheck', {
+      .get('http://15.165.203.24/api/mycheck', {
         headers: { Authorization: `Bearer ${localStorage.usertoken}` }
       })
       .then(response => {
@@ -342,7 +342,7 @@ export default {
       })
 
     axios
-      .get('/api/status', {
+      .get('http://15.165.203.24/api/status', {
         headers: { Authorization: `Bearer ${localStorage.usertoken}` }
       })
       .then(response => {
@@ -359,7 +359,7 @@ export default {
   methods: {
     getUser () {
       return axios
-        .get('/api/auth/profile', {
+        .get('http://15.165.203.24/api/auth/profile', {
           headers: { Authorization: `Bearer ${localStorage.usertoken}` }
         })
         .then(res => {
@@ -390,7 +390,7 @@ export default {
 
       this.$validator.validateAll().then(() => {
         axios
-          .post('/api/myupdate', this.profile_photo)
+          .post('http://15.165.203.24/api/myupdate', this.profile_photo)
           .then(response => {
             /* this.$router.push('/') */
             console.log(response)

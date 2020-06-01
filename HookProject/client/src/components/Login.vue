@@ -4,7 +4,7 @@
       <div class="col-md-5 mt-5 mx-auto">
         <form v-on:submit.prevent="login">
           <img
-            src="/static/logo.png"
+            src="/img/logo.png"
             width="30%;"
             style="display: block; margin: 0px auto; padding-bottom:7%;"
             alt
@@ -64,7 +64,7 @@ export default {
     login () {
       // axios.defaults.headers.common['Authorization'] = 'Bearer ' + Vue.auth.getToken()
       axios
-        .post('/api/auth/login', {
+        .post('http://15.165.203.24/api/auth/login', {
           email: this.email,
           password: this.password
         })

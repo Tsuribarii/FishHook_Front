@@ -35,7 +35,7 @@ export default {
   },
   methods: {
     getResults (page = 1) {
-      axios.get('/api/fishing?page=' + page)
+      axios.get('http://15.165.203.24/api/fishing?page=' + page)
         .then(response => {
           this.searchData = response.data
           console.log(this.searchData)
