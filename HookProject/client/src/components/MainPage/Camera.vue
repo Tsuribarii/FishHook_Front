@@ -132,7 +132,7 @@ export default {
       formData.append('token', localStorage.usertoken)
 
       return axios
-        .post('http://13.125.253.47/api/image/store', formData)
+        .post('http://15.165.203.24/api/image/store', formData)
         .then(res => {
           console.log(res.data)
           router.push({ name: 'Rankregister' })
