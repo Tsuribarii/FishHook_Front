@@ -37,7 +37,7 @@ export default {
   },
   created () {
     axios
-      .get('http://15.165.203.24/api/show/' + this.$route.params.board)
+      .get('/api/show/' + this.$route.params.board)
       .then(response => {
         this.board = response.data
         console.log(this.board)
@@ -60,7 +60,7 @@ export default {
         },
         function () {
           axios
-            .delete('http://15.165.203.24/api/delete/' + this.$route.params.board)
+            .delete('/api/delete/' + this.$route.params.board)
             .then(response => {
               let index = this.board.indexOf(board)
               this.boards.splice(index, 1)

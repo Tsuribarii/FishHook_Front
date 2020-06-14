@@ -18,25 +18,25 @@
             </tr>
           </tbody>
         </table>
-        <div style=" height:445px; overflow:hidden;">
-        <table class="col table" style="text-align:center;">
-          <thead>
-            <tr>
-              <th scope="col" style="border:none">시간</th>
-              <th scope="col" style="border:none">지역</th>
-              <th scope="col" style="border:none">물때</th>
-              <th scope="col" style="border:none">날씨</th>
-            </tr>
-          </thead>
-          <tbody v-for="weather in weathers" v-bind:key="weather.id" :weather="weather">
-            <tr>
-              <td scope="row">{{ weather.time }}</td>
-              <td>{{ weather.weather_status }}</td>
-              <td>{{ weather.temperature }}</td>
-              <td>{{ weather.wind_direction }}</td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="sayonara" style=" height:445px; overflow:hidden;">
+          <table class="col table" style="text-align:center;">
+            <thead>
+              <tr>
+                <th scope="col" style="border:none">시간</th>
+                <th scope="col" style="border:none">지역</th>
+                <th scope="col" style="border:none">물때</th>
+                <th scope="col" style="border:none">날씨</th>
+              </tr>
+            </thead>
+            <tbody v-for="weather in weathers" v-bind:key="weather.id" :weather="weather">
+              <tr>
+                <td scope="row">{{ weather.time }}</td>
+                <td>{{ weather.weather_status }}</td>
+                <td>{{ weather.temperature }}</td>
+                <td>{{ weather.wind_direction }}</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
 <!--     <div class="row">
@@ -114,11 +114,20 @@
       </div>
     </div> -->
 
-    <div style="margin-left:85%">
+    <div class="anatamo" style="margin-left:85%">
       <router-link
         :to="'/reservation'"
         tag="button"
         class="btn btn-lg btn-outline-secondary1"
+      >선박대여</router-link>
+    </div>
+
+    <div class="mobileanata">
+      <router-link
+        :to="'/reservation'"
+        tag="button"
+        class="btn btn-lg btn-outline-secondary1"
+        style="float:right;"
       >선박대여</router-link>
     </div>
   </div>
@@ -137,7 +146,7 @@ export default {
     }
   },
   created () {
-    axios.get('http://15.165.203.24/api/tide/' + this.$route.params.tide)
+    axios.get('/api/tide/' + this.$route.params.tide)
       .then(response => {
         this.tides = response.data[0]
         this.weathers = response.data[1]
@@ -153,6 +162,23 @@ export default {
   }
 }
 </script>
+
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Noto+Serif+KR:wght@300&display=swap');
+
+@media screen and (min-width: 769px) {
+
+   .mobileanata{
+    display:none;
+   }
+}
+
+@media screen and (max-width: 768px) {
+   .sayonara{
+     display: none;
+   }
+   .anatamo{
+    display:none;
+   }
+}
 </style>

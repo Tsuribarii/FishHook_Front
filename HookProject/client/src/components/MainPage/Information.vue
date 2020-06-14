@@ -1,7 +1,9 @@
 <template>
   <div class="container">
-    <h5 style="margin-top:4%; text-align:center; font-size:2rem; font-family: 'Quicksand', sans-serif;" >&rtrif;
+    <h5 class="nope" style="margin-top:4%; text-align:center; font-size:2rem; font-family: 'Quicksand', sans-serif;" >&rtrif;
 Please click the area  &ltrif;</h5>
+    <h8 class="immobile" style="margin-top:4%; text-align:center; font-family: 'Quicksand', sans-serif;" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &rtrif;
+    Please click the area  &ltrif;</h8>
     <div class="col"  style="display:inline-block; margin-top:4%;">
 
       <!-- <img src="/static/info_map.png" id="top" width="10%" /> -->
@@ -67,6 +69,22 @@ Please click the area  &ltrif;</h5>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Josefin+Slab:wght@100&family=Quicksand&family=Tangerine:wght@700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Noto+Serif+KR:wght@300&display=swap');
+
+@media screen and (min-width: 769px) {
+
+   .immobile{
+     display:none;
+   }
+}
+
+@media screen and (max-width: 768px) {
+   .nope{
+     display: none;
+   }
+   .immobile{
+     display:visible;
+   }
+}
 </style>
 
 <script>
@@ -86,7 +104,7 @@ export default {
   },
   created () {
     axios
-      .post('http://15.165.203.24/api/tide/index')
+      .post('/api/tide/index')
       .then(response => {
         this.tides = response.data
         console.log(response.data)

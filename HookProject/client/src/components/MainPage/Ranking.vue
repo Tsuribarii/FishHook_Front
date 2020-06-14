@@ -4,16 +4,16 @@
       <table class="table" style="text-align:center; font-family: 'Nanum Gothic', sans-serif;">
         <thead>
           <tr>
-            <th scope="col" style="border:none">순위</th>
+            <th scope="col" style="border:none" width="5%;">순위</th>
             <th scope="col" style="border:none">물고기 사진</th>
-            <th scope="col" style="border:none">cm</th>
+            <th scope="col" style="border:none" width="15%;">cm</th>
             <th scope="col" style="border:none">유저 이름</th>
           </tr>
         </thead>
         <tbody v-for="(rank, index) in rankData.data" :key="rank.id" :rankData="rankData[index]">
           <tr>
             <th scope="row" style="line-height:6rem;">{{ index + 1 }}</th>
-            <th><img :src="rank.photo"  style="width:20%; padding:1%;"/></th>
+            <th><img :src="rank.url"  style="width:12%; padding:0.5%;"/></th>
             <td style="line-height:6rem;">{{ rank.length }} cm</td>
             <td style="line-height:6rem;">{{ rank.name }}</td>
           </tr>
@@ -22,7 +22,7 @@
     </div>
 
     <pagination :data="rankData" @pagination-change-page="getResults" class="justify-content-md-center" style="margin-top: 3%;"></pagination>
-    <div class="form-group" style="margin-top: 1%;">
+    <!-- <div class="form-group" style="margin-top: 1%;">
       <router-link
         to="/camera"
         tag="button"
@@ -30,7 +30,7 @@
         style="position:absolute; top:85%; right:22%;"
         >Camera</router-link
       >
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -61,7 +61,7 @@ export default {
   methods: {
     getUser () {
       return axios
-        .get('http://15.165.203.24/api/auth/profile', {
+        .get('/api/auth/profile', {
           headers: { Authorization: `Bearer ${localStorage.usertoken}` }
         })
         .then(res => {
@@ -73,7 +73,7 @@ export default {
         })
     },
     getResults (page = 1) {
-      axios.get('http://15.165.203.24/api/rank?page=' + page)
+      axios.get('/api/rank?page=' + page)
         .then(response => {
           this.rankData = response.data
           console.log(this.rankData)

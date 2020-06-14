@@ -1,11 +1,11 @@
 <template>
   <div class="container">
-    <div class="row" style="margin-top: 2%; margin-left: 8%; margin-bottom: 3%; font-family: 'Nanum Gothic', sans-serif;, serif;">
+    <div class="row" style="margin-top: 6%; margin-left: 8%; margin-bottom: 3%; font-family: 'Nanum Gothic', sans-serif;, serif;">
       <div v-for="search in searchData.data" :key="search.id"  style="margin-left: 2%;">
         <b-card-group deck>
-          <b-card
+          <b-card class="bin"
             :title="search.place_name"
-            style="width:18rem;"
+
           >
             <b-card-text>{{ search.phone_number }}</b-card-text>
             <a
@@ -35,7 +35,7 @@ export default {
   },
   methods: {
     getResults (page = 1) {
-      axios.get('http://15.165.203.24/api/fishing?page=' + page)
+      axios.get('/api/fishing?page=' + page)
         .then(response => {
           this.searchData = response.data
           console.log(this.searchData)
@@ -51,4 +51,17 @@ export default {
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Noto+Serif+KR:wght@300&display=swap');
+
+@media screen and (min-width: 769px) {
+   .bin{
+     width:18rem;
+   }
+}
+
+@media screen and (max-width: 768px) {
+   .bin{
+     width:15rem;
+   }
+}
+
 </style>

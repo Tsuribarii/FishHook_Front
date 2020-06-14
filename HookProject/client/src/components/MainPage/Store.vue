@@ -1,73 +1,63 @@
 <template>
-  <div style="margin-top:10%;">
-    <!-- <div>
-      <h2>Search and add a pin</h2>
-      <label>
-        <gmap-autocomplete
-          @place_changed="setPlace">
-        </gmap-autocomplete>
-        <button @click="addMarker">Add</button>
-      </label>
-      <br/>
+  <div class="row" style="margin-top:3%;">
+    <div class="col-lm-3">
+        <div id="map" ref="map">
+          <map-marker :lat="35.876867" :lng="128.662890"></map-marker>
+          <map-marker :lat="35.900827" :lng="128.608796"></map-marker>
+          <map-marker :lat="35.90057" :lng="128.631704"></map-marker>
+        </div>
     </div>
-    <br> -->
-    <gmap-map
-      :center="center"
-      :zoom="12"
-      style="width:100%;  height: 400px;"
-    >
-      <gmap-marker
-        :key="index"
-        v-for="(m, index) in markers"
-        :position="m.position"
-        @click="center=m.position"
-      ></gmap-marker>
-    </gmap-map>
+    <button class="btnedit btn btn-primary1">금호낚시프라자</button>
   </div>
+
 </template>
 
 <script>
+import MapMarker from './MapMarker'
+import MapInfoWindow from './MapInfoWindow'
+
 export default {
-  data () {
-    return {
-      // default to Montreal to keep it simple
-      // change this to whatever makes sense
-      center: { lat: 45.508, lng: -73.587 },
-      markers: [],
-      places: [],
-      currentPlace: null
-    }
+  components: {
+    MapMarker,
+    MapInfoWindow
   },
-
-  mounted () {
-    this.geolocate()
-  },
-
+  data: () => ({
+    map: null
+  }),
   methods: {
-    // receives a place object via the autocomplete component
-    setPlace (place) {
-      this.currentPlace = place
-    },
-    addMarker () {
-      if (this.currentPlace) {
-        const marker = {
-          lat: this.currentPlace.geometry.location.lat(),
-          lng: this.currentPlace.geometry.location.lng()
-        }
-        this.markers.push({ position: marker })
-        this.places.push(this.currentPlace)
-        this.center = marker
-        this.currentPlace = null
+    getMap (callback) {
+      let vm = this
+      function checkForMap () {
+        if (vm.map) callback(vm.map)
+        else setTimeout(checkForMap, 200)
       }
-    },
-    geolocate () {
-      navigator.geolocation.getCurrentPosition(position => {
-        this.center = {
-          lat: position.coords.latitude,
-          lng: position.coords.longitude
-        }
-      })
+      checkForMap()
     }
+  },
+  mounted () {
+    this.map = new window.google.maps.Map(this.$refs["map"], {
+      center: { lat: 35.896335, lng: 128.621815 },
+      zoom: 13
+    })
   }
 }
 </script>
+
+<style scoped>
+  #map {
+    width:2600px;
+    height:700px;
+    background: grey;
+  }
+  .btnedit{
+    position:fixed;
+    width:100px;
+    right:330px;
+    top:660px;
+    opacity:0;
+    color:black;
+  }
+  .btnedit:hover{
+    opacity:1;
+  }
+</style>

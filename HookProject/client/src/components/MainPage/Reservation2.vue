@@ -70,7 +70,7 @@ Vue.use(Datetime)
 
 export default {
   created () {
-    axios.get('http://15.165.203.24/api/shipshow/' + this.$route.params.ship)
+    axios.get('/api/shipshow/' + this.$route.params.ship)
       .then(response => {
         this.ship = response.data
         console.log(response.data)

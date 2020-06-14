@@ -93,32 +93,8 @@ export default {
     }
   },
   methods: {
-    /* onCapture (stream) {
+    onCapture (stream) {
       console.log('On Started Event', stream);
-    }, */
-    onCapture() {
-      this.img = this.$refs.webcam.capture();
-
-      console.log(this.img)
-
-      let formData = new FormData()
-      formData.append('image', this.img)
-      formData.append('token', localStorage.usertoken)
-
-      return axios
-        .post('http://15.165.203.24/api/image/store', formData)
-        .then(res => {
-          console.log(res.data)
-          router.push({ name: 'Rankregister' })
-          return res.data
-        })
-        .catch(err => {
-          console.log(err)
-          console.log(err.response.data)
-        })
-    },
-    onStarted(stream) {
-      console.log("On Started Event", stream);
     },
     onStopped (stream) {
       console.log('On Stopped Event', stream);
@@ -156,7 +132,7 @@ export default {
       formData.append('token', localStorage.usertoken)
 
       return axios
-        .post('http://15.165.203.24/api/image/store', formData)
+        .post('http://13.125.253.47/api/image/store', formData)
         .then(res => {
           console.log(res.data)
           router.push({ name: 'Rankregister' })
