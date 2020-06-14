@@ -15,7 +15,7 @@
     "unit": "jest --config test/unit/jest.conf.js --coverage"
   },
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.18.1",
     "bootstrap": "^4.4.1",
     "bootstrap-vue": "^2.14.0",
     "chart.js": "^2.8.0",
