@@ -5,20 +5,19 @@
   </div>
 </template>
 
-<script type="text/javascript">
-  import axios from 'axios'
-  import user from '/myPage/UserAbout'
+<script>
+import user from '/myPage/UserAbout'
 
-  export default {
-    components: {
-      user,
-    },
-    data() {
-      return {
+export default {
+  components: {
+    user
+  },
+  data () {
+    return {
 
-      }
-    },
+    }
   }
+}
 </script>
 
 <style>

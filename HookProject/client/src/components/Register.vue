@@ -1,10 +1,10 @@
 <template>
-  <div class="container" style="margin-top: 5%;">
+  <div class="container" style="margin-top: 3%">
     <div class="row">
       <div class="col-md-6 mt-5 mx-auto">
         <form v-on:submit.prevent="register">
-          <h1 class="h3 mb-3 font-weight-normal">Register</h1>
-          <div class="custom-control custom-radio custom-control-inline">
+          <h1 class="h3 mb-3 font-weight-normal" style="margin-bottom: 10%;">Register</h1>
+          <div class="custom-control custom-radio custom-control-inline" style="margin-bottom: 1%;">
             <input
               type="radio"
               id="1"
@@ -74,22 +74,22 @@
 </template>
 
 <script>
-import axios from "axios";
-import router from "../router";
+import axios from 'axios'
+import router from '../router'
 export default {
-  data() {
+  data () {
     return {
       roles: 1,
-      name: "",
-      email: "",
-      password: "",
-      phone_number: ""
-    };
+      name: '',
+      email: '',
+      password: '',
+      phone_number: ''
+    }
   },
   methods: {
-    register() {
+    register () {
       axios
-        .post("/api/auth/register", {
+        .post('http://15.165.203.24/api/auth/register', {
           roles: this.roles,
           name: this.name,
           email: this.email,
@@ -97,13 +97,13 @@ export default {
           phone_number: this.phone_number
         })
         .then(res => {
-          console.log(res);
-          router.push({ name: "Login" });
+          console.log(res)
+          router.push({ name: 'Login' })
         })
         .catch(err => {
-          console.log(err);
-        });
+          console.log(err)
+        })
     }
   }
-};
+}
 </script>

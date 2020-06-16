@@ -1,211 +1,119 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" style="opacity: 0.9;">
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-toggle="collapse"
-      data-target="#navbar1"
-      aria-controls="navbar1"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="justify-content-center">
+  <!-- <ul class="nav justify-content-center">
+    <li class="nav-item" style="display:inline-block">
       <router-link to="/">
         <img src="/static/logo.png" width="9%;" alt />
       </router-link>
-    </div>
-    <div class="collapse navbar-collapse" id="navbar1">
-      <ul class="navbar-nav ml-auto">
-        <li v-if="auth == ''" class="nav-item">
-          <router-link class="nav-link" to="/login">
-            <svg
-              class="bi bi-gear-fill"
-              width="1.3em"
-              height="1.3em"
-              viewBox="0 0 16 16"
-              fill="currentColor"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                fill-rule="evenodd"
-                d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 01-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 01.872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 012.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 012.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 01.872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 01-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 01-2.105-.872l-.1-.34zM8 10.93a2.929 2.929 0 100-5.86 2.929 2.929 0 000 5.858z"
-                clip-rule="evenodd"
-              />
-            </svg>
-          </router-link>
-        </li>
-        <li v-if="auth == 'loggedin'" class="nav-item">
-          <router-link class="nav-link" to="/">
-            <svg
-              class="bi bi-house-fill"
-              width="1em"
-              height="1em"
-              viewBox="0 0 16 16"
-              fill="currentColor"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                fill-rule="evenodd"
-                d="M8 3.293l6 6V13.5a1.5 1.5 0 01-1.5 1.5h-9A1.5 1.5 0 012 13.5V9.293l6-6zm5-.793V6l-2-2V2.5a.5.5 0 01.5-.5h1a.5.5 0 01.5.5z"
-                clip-rule="evenodd"
-              />
-              <path
-                fill-rule="evenodd"
-                d="M7.293 1.5a1 1 0 011.414 0l6.647 6.646a.5.5 0 01-.708.708L8 2.207 1.354 8.854a.5.5 0 11-.708-.708L7.293 1.5z"
-                clip-rule="evenodd"
-              />
-            </svg>
-          </router-link>
-        </li>
-        <!-- 일반유저 -->
-        <li v-if="auth == 'loggedin' && roles =='1'" class="nav-item">
-          <router-link class="nav-link" to="/usermypage">
-            <svg
-              class="bi bi-person-fill"
-              width="1em"
-              height="1em"
-              viewBox="0 0 16 16"
-              fill="currentColor"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                fill-rule="evenodd"
-                d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 100-6 3 3 0 000 6z"
-                clip-rule="evenodd"
-              />
-            </svg>
-          </router-link>
-        </li>
-        <!-- 판매자 -->
-        <li v-if="auth == 'loggedin' && roles =='2'" class="nav-item">
-          <router-link class="nav-link" to="/sellermypage">
-            <svg
-              class="bi bi-person-fill"
-              width="1em"
-              height="1em"
-              viewBox="0 0 16 16"
-              fill="currentColor"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                fill-rule="evenodd"
-                d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 100-6 3 3 0 000 6z"
-                clip-rule="evenodd"
-              />
-            </svg>
-          </router-link>
-        </li>
+    </li>
+  </ul> -->
 
-        <li v-if="auth == 'loggedin'" class="nav-item">
-          <router-link class="nav-link" to="/notification">
-            <svg
-              class="bi bi-bell-fill"
-              width="1em"
-              height="1em"
-              viewBox="0 0 16 16"
-              fill="currentColor"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M8 16a2 2 0 002-2H6a2 2 0 002 2zm.995-14.901a1 1 0 10-1.99 0A5.002 5.002 0 003 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z"
-              />
-            </svg>
-          </router-link>
-        </li>
-        <li v-if="auth == 'loggedin'" class="nav-item">
-          <a class="nav-link" href v-on:click="logout">
-            <svg
-              class="bi bi-unlock-fill"
-              width="1em"
-              height="1em"
-              viewBox="0 0 16 16"
-              fill="currentColor"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path d="M.5 9a2 2 0 012-2h7a2 2 0 012 2v5a2 2 0 01-2 2h-7a2 2 0 01-2-2V9z" />
-              <path
-                fill-rule="evenodd"
-                d="M8.5 4a3.5 3.5 0 117 0v3h-1V4a2.5 2.5 0 00-5 0v3h-1V4z"
-                clip-rule="evenodd"
-              />
-            </svg>
-          </a>
-        </li>
-      </ul>
-    </div>
-    <div class="collapse navbar-collapse" id="navbar1">
-      <ul class="navbar-nav">
-        <li v-if="auth == 'loggedin'" class="nav-item">
-          <router-link class="nav-link" to="/community">Community</router-link>
-        </li>
-        <li v-if="auth == 'loggedin'" class="nav-item">
-          <router-link class="nav-link" to="/ranking">Ranking</router-link>
-        </li>
-        <li v-if="auth == 'loggedin'" class="nav-item">
-          <router-link class="nav-link" to="/information">Information</router-link>
-        </li>
-        <li v-if="auth == 'loggedin'" class="nav-item">
-          <router-link class="nav-link" to="/store">Store</router-link>
-        </li>
-        <li v-if="auth == 'loggedin'" class="nav-item">
-          <router-link class="nav-link" to="/reservation">Reservation</router-link>
-        </li>
-        <li v-if="auth == 'loggedin'" class="nav-item">
-          <router-link class="nav-link" to="/profile">Profile</router-link>
-        </li>
-        <li v-if="auth == 'loggedin'" class="nav-item">
-          <router-link class="nav-link" to="/mypage">Mypage</router-link>
-        </li>
-      </ul>
-    </div>
-  </nav>
+<nav class="navbar navbar-expand-md sticky-top">
+  <!-- One of the primary actions on mobile is to call a business - This displays a phone button on mobile only -->
+  <div class="navbar-toggler-right">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  </div>
+
+  <div class="collapse navbar-collapse flex-column " id="navbar">
+
+    <ul class="navbar-nav w-100 justify-content-center px-3">
+      <li class="nav-item active">
+        <router-link to="/" class="nav-link">
+          <img src="/static/logo_mini.png" alt /><span class="sr-only">(current)</span>
+        </router-link>
+      </li>
+    </ul>
+    <div style="width:100%;"><hr></div>
+    <ul class="navbar-nav justify-content-center w-100 px-3">
+      <li v-if="auth == 'loggedin'" class="nav-item active" style="margin-right:3%;">
+        <router-link class="nav-link" to="/community" style="color:#535353;">Community <span class="sr-only">(current)</span></router-link>
+      </li>
+      <li v-if="auth == 'loggedin'" class="nav-item active" style="margin-right:3%;">
+        <router-link class="nav-link" to="/ranking" style="color:#535353;">Ranking <span class="sr-only">(current)</span></router-link>
+      </li>
+      <li class="nav-item active" style="margin-right:3%;">
+        <router-link class="nav-link" to="/information" style="color:#535353;">Information <span class="sr-only">(current)</span></router-link>
+      </li>
+      <li class="nav-item active" style="margin-right:3%;">
+        <router-link class="nav-link" to="/search" style="color:#535353;">Search <span class="sr-only">(current)</span></router-link>
+      </li>
+      <li class="nav-item active" style="margin-right:3%;">
+        <router-link class="nav-link" to="/store" style="color:#535353;">Store <span class="sr-only">(current)</span></router-link>
+      </li>
+      <li v-if="auth == 'loggedin' && roles =='1'" class="nav-item active" style="margin-right:3%;">
+        <router-link class="nav-link" to="/reservation" style="color:#535353;">Reservation <span class="sr-only">(current)</span></router-link>
+      </li>
+      <!-- 유저 마이페이지 -->
+      <li v-if="auth == 'loggedin' && roles =='1'" class="nav-item active" style="margin-right:3%;">
+        <router-link class="nav-link" to="/usermypage" style="color:#535353;">Mypage <span class="sr-only">(current)</span></router-link>
+      </li>
+      <!-- 판매자 마이페이지 -->
+      <li v-if="auth == 'loggedin' && roles =='2'" class="nav-item active" style="margin-right:3%;">
+        <router-link class="nav-link" to="/sellermypage" style="color:#535353;">Mypage <span class="sr-only">(current)</span></router-link>
+      </li>
+      <li v-if="auth == 'loggedin'" class="nav-item active" style="margin-right:3%;">
+        <a class="nav-link" href v-on:click="logout" style="color:#535353;">Logout <span class="sr-only">(current)</span></a>
+      </li>
+      <li v-if="auth == ''" class="nav-item active" style="margin-right:3%;">
+        <router-link class="nav-link" to="/login" style="color:#535353;">Login <span class="sr-only">(current)</span></router-link>
+      </li>
+      <li class="nav-item active" style="margin-right:3%; margin-top:0.01%;">
+        <router-link class="nav-link" to="/term" style="color:#535353;">
+          <svg class="bi bi-question" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path d="M5.25 6.033h1.32c0-.781.458-1.384 1.36-1.384.685 0 1.313.343 1.313 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.007.463h1.307v-.355c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.326 0-2.786.647-2.754 2.533zm1.562 5.516c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z"/>
+          </svg>
+        </router-link>
+      </li>
+    </ul>
+  </div>
+</nav>
+
 </template>
 
 <script>
-import EventBus from "./EventBus";
-import axios from "axios";
+import EventBus from './EventBus'
+import axios from 'axios'
 
-EventBus.$on("logged-in", test => {
-  console.log(test);
-});
+EventBus.$on('logged-in', test => {
+  console.log(test)
+})
 
 export default {
-  data() {
+  data () {
     this.getUser().then(res => {
-      this.roles = res.user.roles;
-      return res;
-    });
+      this.roles = res.user.roles
+      return res
+    })
     return {
-      auth: "",
-      user: "",
-      roles: ""
-    };
+      auth: '',
+      user: '',
+      roles: ''
+    }
   },
   methods: {
-    logout() {
-      localStorage.removeItem("usertoken");
-      this.$router.push("/");
+    logout () {
+      localStorage.removeItem('usertoken')
+      this.$router.push('/')
     },
-    getUser() {
+    getUser () {
       return axios
-        .get("/api/auth/profile", {
+        .get('/api/auth/profile', {
           headers: { Authorization: `Bearer ${localStorage.usertoken}` }
         })
         .then(res => {
           // console.log(res.data)
-          return res.data;
+          return res.data
         })
         .catch(err => {
-          console.log(err);
-        });
+          console.log(err)
+        })
     }
   },
-  mounted() {
-    EventBus.$on("logged-in", status => {
-      this.auth = status;
-    });
+  mounted () {
+    EventBus.$on('logged-in', status => {
+      this.auth = status
+    })
   }
-};
+}
 </script>

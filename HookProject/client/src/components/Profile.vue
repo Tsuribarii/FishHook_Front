@@ -21,34 +21,33 @@
 </template>
 
 <script>
-import axios from "axios";
+import axios from 'axios'
 export default {
-  data() {
+  data () {
     this.getUser().then(res => {
-      this.name = res.user.name;
-      this.email = res.user.email;
-      return res;
-    });
+      this.name = res.user.name
+      this.email = res.user.email
+      return res
+    })
     return {
-      name: "",
-      email: ""
-      
-    };
+      name: '',
+      email: ''
+    }
   },
   methods: {
-    getUser() {
+    getUser () {
       return axios
-        .get("/api/auth/profile", {
+        .get('/api/auth/profile', {
           headers: { Authorization: `Bearer ${localStorage.usertoken}` }
         })
         .then(res => {
           // console.log(res.data)
-          return res.data;
+          return res.data
         })
         .catch(err => {
-          console.log(err);
-        });
+          console.log(err)
+        })
     }
   }
-};
+}
 </script>

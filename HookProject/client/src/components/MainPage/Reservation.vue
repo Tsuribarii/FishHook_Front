@@ -1,31 +1,73 @@
 <template>
-  <div class="container" style="margin-top: 10%;">
-    <div class="row">
-      <div id="app"></div>
-      <div style="margin-left:10%;">
-        <img src="/static/deunfishing.png" id="top" width="60%" style="margin-top:1%;" />
-        <h2>든든한 낚시</h2>
-        <h4 style="color: grey;">승선할 날짜를 선택하세요</h4>
-
-        <datetime type="datetime" v-model="datetime12" use12-hour></datetime>
+  <div class="container">
+    <div class="row" style="margin-top: 5%; margin-bottom: 1%; ">
+      <!-- <h2 >Reservation</h2> -->
+    </div>
+    <div class="row" style="margin-left: 3%; margin-bottom:3%;">
+      <div v-for="ship in laravelData.data" :key="ship.id">
+        <b-card-group deck style="width: 90%;">
+          <b-card
+            class="card-img-top"
+            :title="ship.name"
+            :img-src="ship.ship_image"
+            img-alt="Image"
+            img-top
+            tag="article"
+            style="width:22rem; height:26rem; margin-bottom:3%; font-family: 'Nanum Gothic', sans-serif;, serif;"
+          >
+            <b-card-sub-title style="font-family: 'Nanum Gothic', sans-serif;, serif;">
+              {{ ship.owner_name}}
+            </b-card-sub-title>
+            <b-card-text style="font-family: 'Nanum Gothic', sans-serif;, serif;">
+              {{ ship.departure_time }}:00 ~ {{ ship.arrival_time }}:00<br />
+              {{ ship.cost }}원
+            </b-card-text>
+            <router-link
+              :to="'/reser_view/' + ship.id"
+              tag="button"
+              class="btn btn-lg btn-outline-secondary1 btn-block"
+            >Reservation</router-link>
+          </b-card>
+        </b-card-group>
       </div>
     </div>
+    <pagination :data="laravelData" @pagination-change-page="getResults" class="justify-content-md-center"></pagination>
   </div>
 </template>
 
-<script>
-import Vue from "vue";
-import axios from "axios";
-import Datetime from "vue-datetime";
-import "vue-datetime/dist/vue-datetime.css";
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Noto+Serif+KR:wght@300&display=swap');
+.card-img-top {
+    width: 100%;
+    height: 10vw;
+    object-fit: cover;
+}
+</style>
 
-Vue.use(Datetime);
+<script>
+import axios from 'axios'
 
 export default {
   data () {
     return {
-      datetime12: '2018-05-12T17:19:06.151Z'
+      laravelData: {}
+    }
+  },
+  mounted () {
+    this.getResults()
+  },
+  methods: {
+    getResults (page = 1) {
+      axios.get('/api/shiplist?page=' + page)
+        .then(response => {
+          this.laravelData = response.data
+          console.log(this.laravelData)
+        })
+        .catch(err => {
+          console.log(err)
+          console.log(err.response)
+        })
     }
   }
-};
+}
 </script>

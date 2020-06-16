@@ -1,104 +1,85 @@
 <template>
   <div class="container">
-    <div style="margin-top:10%;">
+    <div style="margin-top:3%;">
       <div class="card">
-        <div class="card-header">Quote</div>
-        <div class="card-body">
+        <div
+          class="card-header"
+          style="font-weight: 500; font-size:1.6rem; font-family: 'Nanum Gothic', sans-serif;, serif;"
+        >Title &nbsp; : &nbsp; {{ board.title }}</div>
+        <div class="card-body" style="height:17rem;">
           <blockquote class="blockquote mb-0">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-            <footer class="blockquote-footer">
-              Someone famous in
-              <cite title="Source Title">Source Title</cite>
-            </footer>
+            <p style="font-family: 'Nanum Gothic', sans-serif;">{{ board.content }}</p>
+            <div
+              style="text-align:right; font-family: 'Nanum Gothic', sans-serif; line-height:35rem;"
+            >작성자 &nbsp; : &nbsp; {{ board.name }}</div>
+          </blockquote>
+        </div>
+        <div class="card-footer" style="font-weight: 500; font-family: 'Nanum Gothic', sans-serif;">
+          Species &nbsp; : &nbsp; {{ board.species }}
+          <br />
+          Bait &nbsp; : &nbsp; {{ board.bait }}
+          <br />
+          Location &nbsp; : &nbsp; {{ board.location }}
+        </div>
+      </div>
+    </div>
+    <!-- 여기부터 댓글 -->
+    <div style="margin-top: 2%;">
+      <div class="card" v-for="comment in laravelData" :key="comment.name">
+        <div
+          class="card-header"
+          style="font-weight: 500; font-size:1rem; font-family: 'Nanum Gothic', sans-serif;, serif;"
+        >Comment</div>
+        <div class="card-body" style="height:5rem;">
+          <blockquote class="blockquote mb-0">
+            <p style="font-family: 'Nanum Gothic', sans-serif;">{{ comment.content }}</p>
+            <div
+              style="text-align:right; font-family: 'Nanum Gothic', sans-serif; line-height:0.1rem;"
+            >작성자 &nbsp; : &nbsp; {{ comment.name }}</div>
           </blockquote>
         </div>
       </div>
     </div>
-    <div class="row" style="margin-top: 10%;">
-      <div class="form-group">
-        <router-link to="/edit" tag="button" class="btn btn-lg btn-outline-secondary1">Edit</router-link>
-      </div>
-      <button class="btn btn-lg btn-primary1" @delete-article="deleteArticle(board)">Delete</button>
-    </div>
   </div>
 </template>
 
+<style>
+@import url("https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Noto+Serif+KR:wght@300&display=swap");
+</style>
 <script>
-import VueCkeditor from "vue-ckeditor2";
 import swal from "sweetalert";
 import axios from "axios";
 
 export default {
-  components: { VueCkeditor },
   data() {
     return {
-      content: "",
-      config: {
-        toolbar: [
-          { name: "document", items: ["Source"] },
-          {
-            name: "basicstyles",
-            items: [
-              "Bold",
-              "Italic",
-              "Underline",
-              "Strike",
-              "Subscript",
-              "Superscript"
-            ]
-          },
-          {
-            name: "paragraph",
-            items: [
-              "NumberedList",
-              "BulletedList",
-              "-",
-              "JustifyLeft",
-              "JustifyCenter",
-              "JustifyRight",
-              "JustifyBlock"
-            ]
-          },
-          { name: "links", items: ["Link", "Unlink"] },
-          { name: "insert", items: ["Image", "Table"] },
-          "/",
-          { name: "styles", items: ["Font", "FontSize"] },
-          { name: "colors", items: ["TextColor", "BGColor"] }
-        ],
-        height: 300
-      },
-      board: {}
+      board: {},
+      laravelData: {}
     };
   },
   created() {
     axios
-      .get("http://13.125.253.47/api/show/" + this.$route.params.board)
+      .get("/api/show/" + this.$route.params.board)
       .then(response => {
         this.board = response.data;
+        console.log(this.board);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+
+    axios
+      .get("/api/showcomment/" + this.$route.params.board)
+      .then(response => {
+        this.laravelData = response.data;
+        console.log(this.laravelData);
       })
       .catch(err => {
         console.log(err);
       });
   },
   methods: {
-    onBlur(evt) {
-      console.log(evt);
-    },
-    onFocus(evt) {
-      console.log(evt);
-    },
-    onContentDom(evt) {
-      console.log(evt);
-    },
-    onDialogDefinition(evt) {
-      console.log(evt);
-    },
-    onFileUploadRequest(evt) {
-      console.log(evt);
-    },
-    onFileUploadResponse(evt) {
-      console.log(evt);
-    },
     deleteArticle(board) {
       swal(
         {
@@ -112,7 +93,7 @@ export default {
         },
         function() {
           axios
-            .delete("http://13.125.253.47/api/delete/" + board.id)
+            .delete("/api/delete/" + this.$route.params.board)
             .then(response => {
               let index = this.board.indexOf(board);
               this.boards.splice(index, 1);
@@ -124,4 +105,3 @@ export default {
   }
 };
 </script>
-

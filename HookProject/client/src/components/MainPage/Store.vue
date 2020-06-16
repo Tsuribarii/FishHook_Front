@@ -1,82 +1,63 @@
 <template>
-    <div style="margin-top: 10%;">
-        <div style="max-width: 800px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between">
-            <div>
-                <h1>Your coordinates:</h1>
-                <p>{{ myCoordinates.lat }} Latitude, {{ myCoordinates.lng }} Longitude</p>
-            </div>
-            <div>
-                <h1>Map coordinates:</h1>
-                <p>{{ mapCoordinates.lat }} Latitude, {{ mapCoordinates.lng }} Longitude</p>
-            </div>
+  <div class="row" style="margin-top:3%;">
+    <div class="col-lm-3">
+        <div id="map" ref="map">
+          <map-marker :lat="35.876867" :lng="128.662890"></map-marker>
+          <map-marker :lat="35.900827" :lng="128.608796"></map-marker>
+          <map-marker :lat="35.90057" :lng="128.631704"></map-marker>
         </div>
-        <GmapMap
-            :center="myCoordinates"
-            :zoom="zoom"
-            style="width:640px; height:360px; margin: 32px auto;"
-            ref="mapRef"
-            @dragend="handleDrag"
-        ></GmapMap>
     </div>
+    <button class="btnedit btn btn-primary1">금호낚시프라자</button>
+  </div>
+
 </template>
+
 <script>
-    export default {
-        data() {
-            return {
-                map: null,
-                myCoordinates: {
-                    lat: 0,
-                    lng: 0
-                },
-                zoom: 7
-            }
-        },
-        created() {
-            // does the user have a saved center? use it instead of the default
-            if(localStorage.center) {
-                this.myCoordinates = JSON.parse(localStorage.center);
-            } else {
-                // get user's coordinates from browser request
-                this.$getLocation({})
-                    .then(coordinates => {
-                        this.myCoordinates = coordinates;
-                    })
-                    .catch(error => alert(error));
-            }
-            // does the user have a saved zoom? use it instead of the default
-            if(localStorage.zoom) {
-                this.zoom = parseInt(localStorage.zoom);
-            }
-        },
-        mounted() {
-            // add the map to a data object
-            this.$refs.mapRef.$mapPromise.then(map => this.map = map);
-        },
-        methods: {
-            handleDrag() {
-                // get center and zoom level, store in localstorage
-                let center = {
-                    lat: this.map.getCenter().lat(),
-                    lng: this.map.getCenter().lng()
-                };
-                let zoom = this.map.getZoom();
-                localStorage.center = JSON.stringify(center);
-                localStorage.zoom = zoom;
-            }
-        },
-        computed: {
-            mapCoordinates() {
-                if(!this.map) {
-                    return {
-                        lat: 0,
-                        lng: 0
-                    };
-                }
-                return {
-                    lat: this.map.getCenter().lat().toFixed(4),
-                    lng: this.map.getCenter().lng().toFixed(4)
-                }
-            }
-        }
+import MapMarker from './MapMarker'
+import MapInfoWindow from './MapInfoWindow'
+
+export default {
+  components: {
+    MapMarker,
+    MapInfoWindow
+  },
+  data: () => ({
+    map: null
+  }),
+  methods: {
+    getMap (callback) {
+      let vm = this
+      function checkForMap () {
+        if (vm.map) callback(vm.map)
+        else setTimeout(checkForMap, 200)
+      }
+      checkForMap()
     }
+  },
+  mounted () {
+    this.map = new window.google.maps.Map(this.$refs["map"], {
+      center: { lat: 35.896335, lng: 128.621815 },
+      zoom: 13
+    })
+  }
+}
 </script>
+
+<style scoped>
+  #map {
+    width:2600px;
+    height:700px;
+    background: grey;
+  }
+  .btnedit{
+    position:fixed;
+    width:100px;
+    right:330px;
+    top:660px;
+    opacity:0;
+    color:black;
+  }
+  .btnedit:hover{
+    opacity:1;
+  }
+</style>

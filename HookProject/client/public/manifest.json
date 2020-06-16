@@ -1,0 +1,18 @@
+{
+  "short_name": "釣り針",
+  "name": "釣り針",
+  "icons": [{
+    "src": "/img/icons/android-chrome-192x192.png",
+    "type": "image/png",
+    "sizes": "192x192"
+  }, {
+    "src": "/img/icons/android-chrome-512x512.png",
+    "type": "image/png",
+    "sizes": "512x512"
+  }],
+  "start_url": "/",
+  "background_color": "white",
+  "display": "standalone",
+  "theme_color": "#93c3f3",
+  "scope": "/"
+}
