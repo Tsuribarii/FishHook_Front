@@ -192,13 +192,13 @@ export default {
   props: ["rental"],
   data() {
     this.getUser().then(res => {
-      this.name = res.user.name;
-      this.email = res.user.email;
-      this.password = res.user.password;
-      this.roles = res.user.roles;
-      this.profile_photo = res.user.profile_photo;
-      return res;
-    });
+      this.name = res.user.name
+      this.email = res.user.email
+      this.password = res.user.password
+      this.roles = res.user.roles
+      this.profile_photo = res.user.profile_photo
+      return res
+    })
     return {
       currentTab: 0,
       tab: null,
@@ -237,43 +237,43 @@ export default {
       });
   },
   methods: {
-    getUser() {
+    getUser () {
       return axios
         .get("/api/auth/profile", {
           headers: { Authorization: `Bearer ${localStorage.usertoken}` }
         })
         .then(res => {
           // console.log(res.data)
-          return res.data;
+          return res.data
         })
         .catch(err => {
-          console.log(err);
-        });
+          console.log(err)
+        })
     },
-    imageChanged(e) {
-      console.log(e.target.files[0]);
-      var fileReader = new FileReader();
-      fileReader.readAsDataURL(e.target.files[0]);
+    imageChanged (e) {
+      console.log(e.target.files[0])
+      var fileReader = new FileReader()
+      fileReader.readAsDataURL(e.target.files[0])
       fileReader.onload = e => {
-        this.user.profile_photo = e.target.result;
-      };
+        this.user.profile_photo = e.target.result
+      }
     },
-    update() {
+    update () {
       this.$validator.updateDictionary({
         al: {
           attributes: {
-            name: "emri"
+            name: 'emri'
           }
         }
-      });
-      this.$validator.setLocale("al");
+      })
+      this.$validator.setLocale('al')
 
       this.$validator.validateAll().then(() => {
         axios
           .post("/api/myupdate", this.profile_photo)
           .then(response => {
             /* this.$router.push('/') */
-            console.log(response);
+            console.log(response)
           })
           .catch(err => {
             console.log(err.response);
@@ -295,7 +295,7 @@ export default {
       this.rentals.splice(index, 1);
     }
   }
-};
+}
 </script>
 
 <style>
