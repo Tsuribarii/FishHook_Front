@@ -51,3 +51,7 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+@import url("https://fonts.googleapis.com/css?family=Kosugi+Maru&display=swap");
+</style>

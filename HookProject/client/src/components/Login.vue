@@ -89,6 +89,8 @@ export default {
 </script>
 
 <style>
+@import url("https://fonts.googleapis.com/css?family=Kosugi+Maru&display=swap");
+
 .find {
   color: black;
 }

@@ -1,26 +1,32 @@
 <template>
-  <div class="container">
+  <div>
     <div
       class="row"
-      style="margin-top: 4%; margin-left: 8%; margin-bottom: 0.6%; font-family: 'Nanum Gothic', sans-serif;, serif;"
+      style=" margin-left: 12%; margin-bottom: 0.6%; font-family: 'Kosugi Maru', sans-serif;"
     >
-      <div
-        v-for="search in searchData.data"
-        :key="search.id"
-        style="margin-left: 2%; margin-bottom:2%;"
-      >
-        <b-card-group deck>
-          <b-card class="bin" :title="search.place_name">
-            <b-card-text>{{ search.fishing_type }}</b-card-text>
-            <b-card-text>{{ search.people }}</b-card-text>
-            <b-card-text>{{ search.phone_number }}</b-card-text>
-            <a
-              v-bind:href="search.homepage"
-              tag="button"
-              class="btn btn-lg btn-outline-secondary1 btn-block"
-            >Go homepage</a>
-          </b-card>
-        </b-card-group>
+      <div v-for="search in searchData.data" :key="search.id">
+        <div
+          class="card"
+          style="width: 27rem; margin-left:2.3rem; margin-right:0.2rem; margin-bottom:1rem;"
+        >
+          <div class="card-header" style="background-color: #66b3ff; color:#66b3ff;">Featured</div>
+          <div class="card-body">
+            <h5 class="card-title" style="color:#000387;">
+              <b>{{ search.place_name }}</b>
+            </h5>
+            <p class="card-text" style="height:50px;">
+              {{ search.fishing_type }} &nbsp&nbsp&nbsp | &nbsp&nbsp&nbsp {{ search.people }}
+              <br />
+              <br />
+              <span style="color: #66b3ff">{{ search.phone_number }}</span>
+              <a
+                v-bind:href="search.homepage"
+                class="btn btn-primary2"
+                style="float:right; margin-top: 0;"
+              >Homepage</a>
+            </p>
+          </div>
+        </div>
       </div>
     </div>
     <pagination
@@ -37,7 +43,7 @@ import axios from "axios";
 export default {
   data() {
     return {
-      searchData: {}
+      searchData: {},
     };
   },
   mounted() {
@@ -47,21 +53,22 @@ export default {
     getResults(page = 1) {
       axios
         .get("/api/fishing?page=" + page)
-        .then(response => {
+        .then((response) => {
           this.searchData = response.data;
           console.log(this.searchData);
         })
-        .catch(err => {
+        .catch((err) => {
           console.log(err);
           console.log(err.response);
         });
-    }
-  }
+    },
+  },
 };
 </script>
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Noto+Serif+KR:wght@300&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Kosugi+Maru&display=swap");
 
 @media screen and (min-width: 769px) {
   .bin {

@@ -1,120 +1,62 @@
 <template>
-  <div class="container" style="margin-top: 2%;">
+  <div class="container">
     <div class="row">
-      <table class="col table" style="text-align:center; font-family: 'Nanum Gothic', sans-serif;">
+      <table class="col table" style="text-align:center; font-family: 'Kosugi Maru', sans-serif;">
         <thead>
-          <tr>
-            <th scope="col" style="border:none">날짜</th>
-            <th scope="col" style="border:none">지역</th>
-            <th scope="col" style="border:none">물때</th>
+          <tr style="background-color: #91aae7; color: white;">
+            <th style="text-align:left;">&nbsp;&nbsp;&nbsp;仁川潮見表</th>
+            <th>&nbsp;</th>
+          </tr>
+          <tr style="color: #91aae7;">
+            <th scope="col" style="border:none">
+              <img src="/static/IRcalendar.png" style="width:5%;" />&nbsp; 日日
+            </th>
+            <th scope="col" style="border:none">
+              <img src="/static/IRwave.png" style="width:7%;" />&nbsp; 潮見
+            </th>
           </tr>
         </thead>
         <tbody v-for="tide in tides" v-bind:key="tide.id" :tide="tide">
-          <tr>
-            <td scope="row">5월 {{ tide.date }}일</td>
-            <td>{{ tide.location }}</td>
-            <td>{{ tide.hide_tide }}</td>
+          <tr style="color: #000387;">
+            <th scope="row">8月 {{ tide.date }}日</th>
+            <th>{{ tide.hide_tide }}</th>
           </tr>
         </tbody>
       </table>
       <div class="sayonara" style=" height:445px; overflow:hidden;">
         <table class="col table" style="text-align:center;">
           <thead>
-            <tr>
-              <th scope="col" style="border:none">시간</th>
-              <th scope="col" style="border:none">지역</th>
-              <th scope="col" style="border:none">물때</th>
-              <th scope="col" style="border:none">풍향</th>
+            <tr style="background-color: #91aae7; color: #91aae7">
+              <th colspan="4">물때표<-얘는css로없앨예정</th>
+            </tr>
+            <tr style="color: #91aae7;">
+              <th scope="col" style="border:none">
+                <img src="/static/IRtime.png" style="width:32%;" />&nbsp; 時刻
+              </th>
+              <th scope="col" style="border:none">
+                <img src="/static/IRweather.png" style="width:32%;" />&nbsp; 天気
+              </th>
+              <th scope="col" style="border:none">
+                <img src="/static/IRtemperature.png" style="width:32%;" />&nbsp; 気温
+              </th>
+              <th scope="col" style="border:none">
+                <img src="/static/IRwind.png" style="width:32%;" />&nbsp; 風向
+              </th>
             </tr>
           </thead>
           <tbody v-for="weather in weathers" v-bind:key="weather.id" :weather="weather">
-            <tr>
-              <td scope="row">{{ weather.time }}</td>
-              <td>{{ weather.weather_status }}</td>
-              <td>{{ weather.temperature }}</td>
-              <td>{{ weather.wind_direction }}</td>
+            <tr style="color: #000387;">
+              <th scope="row">{{ weather.time }}</th>
+              <th>{{ weather.weather_status }}</th>
+              <th>{{ weather.temperature }}</th>
+              <th>{{ weather.wind_direction }}</th>
             </tr>
           </tbody>
         </table>
       </div>
     </div>
-    <!--     <div class="row">
-      <svg
-        class="bi bi-geo-alt"
-        color="#75a8f2 "
-        width="1em"
-        height="1em"
-        viewBox="0 0 16 16"
-        fill="currentColor"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          fill-rule="evenodd"
-          d="M8 16s6-5.686 6-10A6 6 0 002 6c0 4.314 6 10 6 10zm0-7a3 3 0 100-6 3 3 0 000 6z"
-          clip-rule="evenodd"
-        />
-      </svg>
-      <h4 style="color: #75A8F2; padding-top: 10%; margin-left:3px;">속초</h4>
-      <button
-        class="btn btn-sm btn-outline-secondary1"
-        style="width:90px; height:50px;"
-      >
-        선박 대여
-      </button>
-      <svg
-        class="bi bi-chevron-right"
-        color="#75A8F2"
-        width="1em"
-        height="1em"
-        viewBox="0 0 16 16"
-        fill="currentColor"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          fill-rule="evenodd"
-          d="M4.646 1.646a.5.5 0 01.708 0l6 6a.5.5 0 010 .708l-6 6a.5.5 0 01-.708-.708L10.293 8 4.646 2.354a.5.5 0 010-.708z"
-          clip-rule="evenodd"
-        />
-      </svg>
-    </div>
-    <hr />
-    <p>2020년 03월 25일 수요일</p>
-    <p>기준 06:00</p>
-    <hr />
-    <div class="row">
-      <div>
-        <img
-          src="/static/cloudy.png"
-          id="top"
-          width="15%"
-          style="margin-top:1%;"
-        />
-        <div>12˚C</div>
-      </div>
-      <p>최저 10˚</p>
-      <p>최고 17˚</p>
-      <p>파고 0.5m</p>
-      <p>풍속 남남동풍 2m/s</p>
-      <hr
-        style="border: none; border-left: 1px solid hsla(200, 10%, 50%,100); height: 30vh; width: 1px;"
-      />
-      <img
-        src="/static/info_re2.png"
-        id="top"
-        width="20%"
-        style="margin-top:1%;"
-      />
-      <p>물때 / 물흐름</p>
-      <div>
-        <h3>9물 /</h3>
-        <div style="width: 4%; height: 10px; background-color: ##75A8F2;">
-          MAX
-        </div>
-      </div>
-    </div>-->
-
     <div class="anatamo" style="margin-left:85%">
-      <router-link :to="'/reservation'" tag="button" class="btn btn-lg btn-outline-secondary1">선박대여</router-link>
+      <router-link :to="'/reservation'" tag="button" class="btn btn-lg btn-primary3">船予約</router-link>
     </div>
 
     <div class="mobileanata">
@@ -136,30 +78,29 @@ export default {
   data() {
     return {
       location: "",
-      tides: [],
-      weathers: []
+      weathers: [],
     };
   },
   created() {
     axios
       .get("/api/tide/" + this.$route.params.tide)
-      .then(response => {
+      .then((response) => {
         this.tides = response.data[0];
         this.weathers = response.data[1];
         console.log(response.data[0]);
         console.log(response.data[1]);
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
       });
   },
-  methods: {}
+  methods: {},
 };
 </script>
 
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Noto+Serif+KR:wght@300&display=swap");
-
+@import url("https://fonts.googleapis.com/css?family=Kosugi+Maru&display=swap");
 @media screen and (min-width: 769px) {
   .mobileanata {
     display: none;

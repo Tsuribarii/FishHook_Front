@@ -1,23 +1,46 @@
 <template>
-  <div class="container">
+  <div class="container" style="font-family: 'Kosugi Maru', sans-serif;">
     <div style="margin-top:2%;">
       <div class="card">
         <div
           class="card-header"
-          style="font-weight: 500; font-size:1.3rem; font-family: 'Nanum Gothic', sans-serif;, serif;"
-        >Title &nbsp; : &nbsp; {{ board.title }}</div>
-        <div class="card-body" style="height:13rem;">
-          <blockquote class="blockquote mb-0">
-            <p style="font-family: 'Nanum Gothic', sans-serif;">{{ board.content }}</p>
-            <div
-              style="text-align:right; font-family: 'Nanum Gothic', sans-serif; line-height:15rem;"
-            >작성자 &nbsp; : &nbsp; {{ board.name }}</div>
-          </blockquote>
+          style="background-color: white; font-weight: 500; font-size:1.2rem; font-family: 'Kosugi Maru', sans-serif;"
+        >
+          <b>
+            <span style=" color:#000387;">タイトル</span>
+            : {{ board.title }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <span
+              style="text-align:right; font-family: 'Nanum Gothic', sans-serif; color:#000387;"
+            >名前</span>
+            : {{ board.name }}&nbsp;&nbsp;&nbsp;&nbsp;
+            <span style="color:#000387;">ビュー</span>
+            : {{ board.hits }}
+          </b>
+
+          <!-- 여기부터 -->
+          <!-- <div style="text-align:right; font-family: 'Nanum Gothic', sans-serif;">
+            <b>
+              <span style="color:#000387;">작성자</span>
+              &nbsp; : &nbsp; {{ board.name }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <span
+                style="color:#000387;"
+              >조회수</span>
+              &nbsp; : &nbsp; {{ board.hits }}
+            </b>
+          </div>-->
+          <!-- 여기까지 -->
         </div>
-        <div class="card-footer" style="font-weight: 500; font-family: 'Nanum Gothic', sans-serif;">
-          Species &nbsp; : &nbsp; {{ board.species }},&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          Bait &nbsp; : &nbsp; {{ board.bait }},&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          Location &nbsp; : &nbsp; {{ board.location }}
+        <div class="card-body" style="height:15rem;">
+          <blockquote class="blockquote mb-0">
+            <p style="font-family: 'Kosugi Maru', sans-serif;">{{ board.content }}</p>
+            <div
+              style="text-align:right; font-family: 'Kosugi Maru', sans-serif; line-height:18rem;color:#000387;"
+            >
+              <b
+                style="font-size:1rem;"
+              >Species &nbsp; : &nbsp; {{ board.species }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bait &nbsp; : &nbsp; {{ board.bait }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Location &nbsp; : &nbsp; {{ board.location }}</b>
+            </div>
+          </blockquote>
         </div>
       </div>
     </div>
@@ -25,26 +48,28 @@
       <div class="card">
         <div
           class="card-header"
-          style="font-weight: 500; font-size:1rem; font-family: 'Nanum Gothic', sans-serif;, serif;"
-        >Comment</div>
+          style="background-color: white; font-weight: 500; font-size:1rem; font-family: 'Nanum Gothic', sans-serif;, serif; color:#000387;"
+        >
+          <b>コメント</b>
+        </div>
         <ul class="list-group list-group-flush">
           <li class="list-group-item" v-for="comment in laravelData" :key="comment.name">
             <p style="font-family: 'Nanum Gothic', sans-serif;">{{ comment.content }}</p>
             <div
               style="text-align:right; font-family: 'Nanum Gothic', sans-serif; line-height:0.1rem;"
-            >작성자 &nbsp; : &nbsp; {{ comment.name }}</div>
+            >ユーザー &nbsp; : &nbsp; {{ comment.name }}</div>
           </li>
           <li class="list-group-item">
             <div class="input-group mb-3">
               <input
                 type="text"
                 class="form-control"
-                placeholder="댓글을 입력해주세요"
+                placeholder="コメントをお書きください。"
                 aria-label="Recipient's username"
                 aria-describedby="button-addon2"
               />
               <div class="input-group-append">
-                <button class="btn btn-outline-secondary" type="button" id="button-addon2">등록</button>
+                <button class="btn btn-primary2" type="button" id="button-addon2">등록</button>
               </div>
             </div>
           </li>
@@ -63,6 +88,7 @@
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Noto+Serif+KR:wght@300&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Kosugi+Maru&display=swap");
 </style>
 <script>
 import swal from "sweetalert";
@@ -72,27 +98,27 @@ export default {
   data() {
     return {
       board: {},
-      laravelData: {}
+      laravelData: {},
     };
   },
   created() {
     axios
       .get("/api/show/" + this.$route.params.board)
-      .then(response => {
+      .then((response) => {
         this.board = response.data;
         console.log(this.board);
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
       });
 
     axios
       .get("/api/showcomment/" + this.$route.params.board)
-      .then(response => {
+      .then((response) => {
         this.laravelData = response.data;
         console.log(this.laravelData);
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
       });
   },
@@ -106,19 +132,19 @@ export default {
           showCancelButton: true,
           confirmButtonColor: "#DD6B55",
           confirmButtonText: "Yes, delete it!",
-          closeOnConfirm: false
+          closeOnConfirm: false,
         },
-        function() {
+        function () {
           axios
             .delete("/api/delete/" + this.$route.params.board)
-            .then(response => {
+            .then((response) => {
               let index = this.board.indexOf(board);
               this.boards.splice(index, 1);
               swal("Deleted!", "Your article has been deleted", "success");
             });
         }.bind(this)
       );
-    }
-  }
+    },
+  },
 };
 </script>

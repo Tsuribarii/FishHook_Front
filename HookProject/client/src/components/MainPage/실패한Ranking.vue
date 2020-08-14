@@ -124,7 +124,7 @@ export default {
       currentTab: 0,
       tab: null,
       items: ["All", "RockFish", "StripedBeakfish", "RedSnapper"],
-      rankData: {}
+      rankData: {},
     };
   },
   mounted() {
@@ -134,21 +134,22 @@ export default {
     getResults(page = 1) {
       axios
         .get("/api/rank?page=" + page)
-        .then(response => {
+        .then((response) => {
           this.rankData = response.data;
           console.log(this.rankData);
         })
-        .catch(err => {
+        .catch((err) => {
           console.log(err);
           console.log(err.response);
         });
-    }
-  }
+    },
+  },
 };
 </script>
 
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Noto+Serif+KR:wght@300&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Kosugi+Maru&display=swap");
 .upload-btn-wrapper {
   position: relative;
   overflow: hidden;

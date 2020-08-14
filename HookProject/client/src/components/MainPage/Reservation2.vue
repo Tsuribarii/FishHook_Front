@@ -1,5 +1,5 @@
 <template>
-  <div class="container" style="margin-top: 7%;">
+  <div class="container" style="margin-top: 3%; font-family: 'Kosugi Maru', sans-serif;">
     <div class="row">
       <div class="col" style="margin-left:10%;">
         <img
@@ -8,59 +8,67 @@
           width="90%"
           style="margin-top:1%; margin-right:0; margin-bottom: 3%;"
         />
-        <div class="justify-content-md-center" style="font-family: 'Nanum Gothic', sans-serif;">
-          <h2>{{ ship.name }}</h2>
-        </div>
       </div>
-      <div class="col" style="font-family: 'Nanum Gothic', sans-serif;">
-        <!-- <h4>{{ ship.name }}</h4>
-        <h4>{{ ship.owner_name }}</h4>
-        <h4>{{ ship.location }}</h4>
-        <h4>최대{{ ship.people }}명</h4>
-        <h4>{{ ship.cost }}</h4>
-        <h4>{{ ship.departure_time }}:00</h4>
-        <h4>{{ ship.arrival_time }}:00</h4>
-        <h4>{{ ship.business_time }}</h4>
-        <h4>{{ ship.homepage }}</h4>
-        <h4 style="color: grey;">승선할 날짜를 선택하세요</h4>-->
-        <form v-on:submit.prevent="book" style="margin-top: 8.5%;">
-          <label for="example-input">Choose a date</label>
-          <b-input-group class="mb-3">
-            <b-form-input
-              id="example-input"
-              v-model="ship.departure_date"
-              type="text"
-              placeholder="YYYY-MM-DD"
-              autocomplete="off"
-              style="width:50px;"
-            ></b-form-input>
-            <b-input-group-append>
-              <b-form-datepicker
-                v-model="ship.departure_date"
-                button-only
-                right
-                locale="en-US"
-                aria-controls="example-input"
-                @context="onContext"
-              ></b-form-datepicker>
-            </b-input-group-append>
-          </b-input-group>
-          <div class="form-group" style="margin-top: 2%;">
-            <label for="text">People</label>
-            <div class="row">
-              <input
-                type="text"
-                v-model="ship.people"
-                class="form-control"
-                name="people"
-                placeholder="1"
-                style="width: 10%; margin-left: 3%;"
-              />
-              명
-            </div>
+      <div
+        class="card"
+        style="width: 27rem; margin-left:2.3rem; margin-right:0.2rem; margin-bottom:1rem;"
+      >
+        <div class="card-header" style="background-color: #66b3ff; color: white;">
+          <b>予約</b>
+        </div>
+        <div class="card-body">
+          <div class="card-title" style=" font-size:1.3rem;">
+            <span style="color:#000387; font-weight:800;">{{ ship.name }}</span>
+            &nbsp;
+            <span
+              style="color : #66b3ff;"
+            >{{ ship.cost }}円</span>
           </div>
-          <button type="submit" class="btn btn-lg btn-primary1 btn-block">Reservation</button>
-        </form>
+          <div
+            class="card-sub-title"
+          >{{ ship.owner_name }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ ship.departure_time }}:00 ~ {{ ship.arrival_time }}:00</div>
+          <form v-on:submit.prevent="book" style="margin-top: 8.5%;">
+            <label for="example-input">日</label>
+            <b-input-group class="mb-3">
+              <b-form-input
+                id="example-input"
+                v-model="ship.departure_date"
+                type="text"
+                placeholder="YYYY-MM-DD"
+                autocomplete="off"
+                style="width:50px;"
+              ></b-form-input>
+              <b-input-group-append>
+                <b-form-datepicker
+                  v-model="ship.departure_date"
+                  button-only
+                  right
+                  locale="en-US"
+                  aria-controls="example-input"
+                  @context="onContext"
+                ></b-form-datepicker>
+              </b-input-group-append>
+            </b-input-group>
+            <div class="form-group" style="margin-top: 2%;">
+              <label for="text">人数</label>
+              <div class="row">
+                <input
+                  type="text"
+                  v-model="ship.people"
+                  class="form-control"
+                  name="people"
+                  placeholder="1"
+                  style="width: 10%; margin-left: 3%;"
+                />
+                人
+              </div>
+            </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button
+              type="submit"
+              class="btn btn-lg btn-primary2"
+            >予約する</button>
+          </form>
+        </div>
       </div>
     </div>
   </div>
@@ -79,17 +87,17 @@ export default {
   created() {
     axios
       .get("/api/shipshow/" + this.$route.params.ship)
-      .then(response => {
+      .then((response) => {
         this.ship = response.data;
         console.log(response.data);
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
       });
   },
   data() {
     return {
-      ship: {}
+      ship: {},
     };
   },
   methods: {
@@ -99,13 +107,13 @@ export default {
           token: localStorage.usertoken,
           departure_date: this.ship.departure_date,
           number_of_people: this.ship.people,
-          ship_id: this.ship.id
+          ship_id: this.ship.id,
         })
-        .then(res => {
+        .then((res) => {
           console.log(res);
           router.push({ name: "Usermypage" });
         })
-        .catch(err => {
+        .catch((err) => {
           console.log(err);
         });
     },
@@ -114,10 +122,11 @@ export default {
       this.formatted = ctx.selectedFormatted;
       // The following will be an empty string until a valid date is entered
       this.selected = ctx.selectedYMD;
-    }
-  }
+    },
+  },
 };
 </script>
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Noto+Serif+KR:wght@300&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Kosugi+Maru&display=swap");
 </style>

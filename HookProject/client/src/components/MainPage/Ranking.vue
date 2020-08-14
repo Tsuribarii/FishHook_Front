@@ -1,23 +1,23 @@
 <template>
   <div class="container">
-    <div style="margin-top:2%;">
-      <table class="table" style="text-align:center; font-family: 'Nanum Gothic', sans-serif;">
+    <div>
+      <table class="table" style="text-align:center; font-family: 'Kosugi Maru', sans-serif;">
         <thead>
-          <tr>
-            <th class="mobile_rank" scope="col" style="border:none" width="10%;">순위</th>
-            <th class="mobile_photo" scope="col" style="border:none" width="40%;">물고기</th>
+          <tr style="color:#66b3ff;">
+            <th class="mobile_rank" scope="col" style="border:none" width="10%;">ランキング</th>
+            <th class="mobile_photo" scope="col" style="border:none" width="40%;">魚の種類</th>
             <th class="mobile_length" scope="col" style="border:none" width="20%;">cm</th>
-            <th class="mobile_name" scope="col" style="border:none">이름</th>
+            <th class="mobile_name" scope="col" style="border:none">名前</th>
           </tr>
         </thead>
         <tbody v-for="(rank, index) in rankData.data" :key="rank.id" :rankData="rankData[index]">
-          <tr>
+          <tr style="color: #000387;">
             <th scope="row" style="line-height:6rem;">{{ index + 1 }}</th>
             <th>
               <img class="mobile_photo_size" :src="rank.url" style="width:50%; height:3.8%;" />
             </th>
-            <td style="line-height:6rem;">{{ rank.length }} cm</td>
-            <td style="line-height:6rem;">{{ rank.name }}</td>
+            <th style="line-height:6rem;">{{ rank.length }} cm</th>
+            <th style="line-height:6rem;">{{ rank.name }}</th>
           </tr>
         </tbody>
       </table>
@@ -46,7 +46,7 @@ import axios from "axios";
 
 export default {
   data() {
-    this.getUser().then(res => {
+    this.getUser().then((res) => {
       this.name = res.user.name;
       this.email = res.user.email;
       this.password = res.user.password;
@@ -57,7 +57,7 @@ export default {
       name: "",
       email: "",
       password: "",
-      rankData: {}
+      rankData: {},
     };
   },
   created() {},
@@ -68,34 +68,34 @@ export default {
     getUser() {
       return axios
         .get("/api/auth/profile", {
-          headers: { Authorization: `Bearer ${localStorage.usertoken}` }
+          headers: { Authorization: `Bearer ${localStorage.usertoken}` },
         })
-        .then(res => {
+        .then((res) => {
           // console.log(res.data)
           return res.data;
         })
-        .catch(err => {
+        .catch((err) => {
           console.log(err);
         });
     },
     getResults(page = 1) {
       axios
         .get("/api/rank?page=" + page)
-        .then(response => {
+        .then((response) => {
           this.rankData = response.data;
           console.log(this.rankData);
         })
-        .catch(err => {
+        .catch((err) => {
           console.log(err);
           console.log(err.response);
         });
-    }
-  }
+    },
+  },
 };
 </script>
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Noto+Serif+KR:wght@300&display=swap");
-
+@import url("https://fonts.googleapis.com/css?family=Kosugi+Maru&display=swap");
 @media screen and (min-width: 769px) {
   .mobileanata {
     display: none;

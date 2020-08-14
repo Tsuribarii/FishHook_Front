@@ -1,22 +1,31 @@
 <template>
   <div class="container">
-    <div style="margin-top:2%;">
-      <table class="table" style="text-align:center; margin-bottom: 3%; font-family: 'Nanum Gothic', sans-serif;">
+    <div>
+      <table
+        class="table"
+        style="text-align:center; font-family: 'Kosugi Maru', sans-serif;margin-bottom: 1%; "
+      >
         <thead>
-          <tr>
-            <th scope="col" style="border:none">번호</th>
-            <th scope="col" style="border:none">제목</th>
-            <th scope="col" style="border:none">이름</th>
-            <th scope="col" style="border:none">조회수</th>
+          <tr style="color:#66b3ff;">
+            <th scope="col" style="border:none">番号</th>
+            <th scope="col" style="border:none">タイトル</th>
+            <th scope="col" style="border:none">名前</th>
+            <th scope="col" style="border:none">ビュー</th>
           </tr>
         </thead>
-        <tbody v-for="(board, index) in laravelData.data" :key="board.id" :laravelData="laravelData[index]">
+        <tbody
+          v-for="(board, index) in laravelData.data"
+          :key="board.id"
+          :laravelData="laravelData[index]"
+          style="color: #000387;"
+        >
           <tr>
-            <th>{{ index + 1 }}</th>
+            <td>{{ index + 1 }}</td>
             <td scope="row">
               <router-link
                 :to="'/view/' + board.id"
                 class="view"
+                style="color: #000387;"
               >{{ board.title }}</router-link>
             </td>
             <td>{{ board.name }}</td>
@@ -25,54 +34,60 @@
         </tbody>
       </table>
 
-      <pagination :data="laravelData" @pagination-change-page="getResults" class="justify-content-md-center"></pagination>
+      <pagination
+        :data="laravelData"
+        @pagination-change-page="getResults"
+        class="justify-content-md-center"
+      ></pagination>
 
       <!-- <div class="form-group" style="margin-top: 10%;">
         <router-link to="/create" tag="button" class="btn btn-lg btn-outline-secondary1">Create</router-link>
-      </div> -->
+      </div>-->
     </div>
   </div>
 </template>
 
 <script>
-import axios from 'axios'
+import axios from "axios";
 
 export default {
-  data () {
+  data() {
     return {
-      laravelData: {}
-    }
+      laravelData: {},
+    };
   },
-  mounted () {
-    this.getResults()
+  mounted() {
+    this.getResults();
   },
   methods: {
-    getResults (page = 1) {
-      axios.get('/api/list?page=' + page)
-        .then(response => {
-          this.laravelData = response.data
-          console.log(this.laravelData)
+    getResults(page = 1) {
+      axios
+        .get("/api/list?page=" + page)
+        .then((response) => {
+          this.laravelData = response.data;
+          console.log(this.laravelData);
         })
-        .catch(err => {
-          console.log(err)
-          console.log(err.response)
-        })
-    }
-  }
-}
+        .catch((err) => {
+          console.log(err);
+          console.log(err.response);
+        });
+    },
+  },
+};
 </script>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Noto+Serif+KR:wght@300&display=swap');
-  .view {
-    color: black;
-  }
-  .view:visited {
-    color: black;
-    text-decoration: none;
-  }
-  .view:hover {
-    color: #75A8F2;
-    text-decoration: none;
-  }
+@import url("https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Noto+Serif+KR:wght@300&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Kosugi+Maru&display=swap");
+.view {
+  color: black;
+}
+.view:visited {
+  color: black;
+  text-decoration: none;
+}
+.view:hover {
+  color: #75a8f2;
+  text-decoration: none;
+}
 </style>

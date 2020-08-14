@@ -37,6 +37,28 @@ export default {
   color: #6185f3;
 }
 
+.btn-primary2 {
+  background: #66b3ff;
+  color: white;
+}
+
+.btn-primary2:hover {
+  background: white;
+  border-color: #66b3ff;
+  color: #66b3ff;
+}
+
+.btn-primary3 {
+  background: #91aae7;
+  color: white;
+}
+
+.btn-primary3:hover {
+  background: white;
+  border-color: #91aae7;
+  color: #91aae7;
+}
+
 .btn-outline-secondary1 {
   border-color: #6185f3;
   color: #6185f3;

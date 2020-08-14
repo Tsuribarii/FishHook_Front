@@ -14,9 +14,7 @@
             :class="{ active: currentTab === index }"
             @click="currentTab = index"
             :key="item"
-          >
-            {{ item }}
-          </div>
+          >{{ item }}</div>
         </div>
       </div>
       <!-- About -->
@@ -25,57 +23,29 @@
       <!-- Check -->
       <div v-show="currentTab === 1">
         <div class="row">
-          <h4
-            style="color: #75A8F2; padding-top: 0.5%; margin-left:3px; margin-right:2%;"
-          >
-            전체
-          </h4>
+          <h4 style="color: #75A8F2; padding-top: 0.5%; margin-left:3px; margin-right:2%;">전체</h4>
           <v-icon color="#A6A6A6">alarm_on</v-icon>
-          <h4
-            style="color: #A6A6A6; padding-top: 0.5%; margin-left:3px; margin-right:2%;"
-          >
-            이용예정
-          </h4>
+          <h4 style="color: #A6A6A6; padding-top: 0.5%; margin-left:3px; margin-right:2%;">이용예정</h4>
           <v-icon color="#A6A6A6">playlist_add_check</v-icon>
-          <h4
-            style="color: #A6A6A6; padding-top: 0.5%; margin-left:3px; margin-right:2%;"
-          >
-            이용완료
-          </h4>
+          <h4 style="color: #A6A6A6; padding-top: 0.5%; margin-left:3px; margin-right:2%;">이용완료</h4>
           <v-icon color="#A6A6A6">undo</v-icon>
-          <h4
-            style="color: #A6A6A6; padding-top: 0.5%; margin-left:3px; margin-right:2%;"
-          >
-            취소・환불
-          </h4>
+          <h4 style="color: #A6A6A6; padding-top: 0.5%; margin-left:3px; margin-right:2%;">취소・환불</h4>
         </div>
         <div class="row">
-          <div style="color: #75A8F2; margin-left:4%; margin-right:4%;">
-            3
-          </div>
-          <div style="color: #A6A6A6; margin-left:5%; margin-right:4%;">
-            0
-          </div>
-          <div style="color: #A6A6A6; margin-left:7%; margin-right:4%;">
-            2
-          </div>
-          <div style="color: #A6A6A6; margin-left:8%; margin-right:4%;">
-            1
-          </div>
+          <div style="color: #75A8F2; margin-left:4%; margin-right:4%;">3</div>
+          <div style="color: #A6A6A6; margin-left:5%; margin-right:4%;">0</div>
+          <div style="color: #A6A6A6; margin-left:7%; margin-right:4%;">2</div>
+          <div style="color: #A6A6A6; margin-left:8%; margin-right:4%;">1</div>
         </div>
 
         <div class="row">
           <!-- 예약된 선박 리스트 -->
           <div class="col-sm" style="margin-top:7%; margin-right:5%;">
             <div class="row">
-              <div
-                style="background-color:grey;width:30rem; height:2.5rem; line-height:1.5rem;"
-              >
+              <div style="background-color:grey;width:30rem; height:2.5rem; line-height:1.5rem;">
                 <div class="row">
                   <v-icon color="#FAFAFA">check_circle_outline</v-icon>
-                  <h4 style="color: #FAFAFA; padding-top: 2%; margin-left:3px;">
-                    이용완료
-                  </h4>
+                  <h4 style="color: #FAFAFA; padding-top: 2%; margin-left:3px;">이용완료</h4>
                 </div>
               </div>
             </div>
@@ -102,7 +72,9 @@
               <div style="margin-top:2%; margin-bottom:2%;">
                 <b style="color: #A6A6A6;">결제금액</b>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <b style="color: #ED0000;">60,000원</b>
+                <b
+                  style="color: #ED0000;"
+                >60,000원</b>
               </div>
             </div>
           </div>
@@ -110,14 +82,10 @@
           <!-- 예약된 선박 리스트 -->
           <div class="col-sm" style="margin-top:7%;">
             <div class="row">
-              <div
-                style="background-color:grey;width:30rem; height:2.5rem; line-height:1.5rem;"
-              >
+              <div style="background-color:grey;width:30rem; height:2.5rem; line-height:1.5rem;">
                 <div class="row">
                   <v-icon color="#FAFAFA">check_circle_outline</v-icon>
-                  <h4 style="color: #FAFAFA; padding-top: 2%; margin-left:3px;">
-                    이용완료
-                  </h4>
+                  <h4 style="color: #FAFAFA; padding-top: 2%; margin-left:3px;">이용완료</h4>
                 </div>
               </div>
             </div>
@@ -144,7 +112,9 @@
               <div style="margin-top:2%; margin-bottom:2%;">
                 <b style="color: #A6A6A6;">결제금액</b>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <b style="color: #ED0000;">60,000원</b>
+                <b
+                  style="color: #ED0000;"
+                >60,000원</b>
               </div>
             </div>
           </div>
@@ -155,28 +125,28 @@
 </template>
 
 <script>
-import UserImg from '@/components/myPage/UserImg'
-import UserAbout from '@/components/myPage/UserAbout'
+import UserImg from "@/components/myPage/UserImg";
+import UserAbout from "@/components/myPage/UserAbout";
 
 export default {
   components: {
     UserImg,
-    UserAbout
+    UserAbout,
   },
-  data () {
+  data() {
     return {
       currentTab: 0,
       tab: null,
-      items: ['about', 'check']
-    }
-  }
-}
+      items: ["about", "check"],
+    };
+  },
+};
 </script>
 
 <style>
 .tab:hover {
   color: #6185f3;
 }
-@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Noto+Serif+KR:wght@300&display=swap');
-
+@import url("https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Noto+Serif+KR:wght@300&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Kosugi+Maru&display=swap");
 </style>

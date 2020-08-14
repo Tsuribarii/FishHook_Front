@@ -1,12 +1,12 @@
 <template>
-  <div class="container" style="margin-top:3%; font-family: 'Nanum Gothic', sans-serif;">
-    <div style="margin-left:22%;">
+  <div class="container" style="margin-top:1%; font-family: 'Kosugi Maru', sans-serif;">
+    <div style="margin-left:20%;">
       <!-- Tab -->
-      <div class="col" style="margin-left:29%;">
-        <div class="tabs" style="position:absolute; top:27%; right:80%;">
+      <div class="col" style="margin-left:30%;">
+        <div class="tabs" style="position:absolute; top:27%; right:85%;">
           <div
             class="tab"
-            style="display:inline; font-size:1.3rem; margin-right:18%; margin-top:5%;"
+            style="display:inline; font-size:1.3rem; margin-right:18%; top:25%;"
             v-for="(item, index) in items"
             :class="{ active: currentTab === index }"
             @click="currentTab = index"
@@ -36,7 +36,10 @@
       <br />
       <div class="row" style="width:280px; display:inline-block; margin-top: 0.5%;">
         <div>
-          <b>Profile &nbsp;&nbsp;──────────────</b>
+          <b>
+            プロフィール &nbsp;&nbsp;
+            <p style="color: #66b3ff;">──────────────────</p>
+          </b>
         </div>
       </div>
       <br />
@@ -45,7 +48,8 @@
         <div>
           <!-- 유저이름 -->
 
-          <h1 style="display:inline">{{ name }}</h1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <h2 style="display:inline">{{ name }}</h2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <br />
           <svg
             class="bi bi-geo-alt"
             color="#75a8f2"
@@ -62,29 +66,28 @@
               clip-rule="evenodd"
             />
           </svg>
-
-          <h4 style="color: #75A8F2; margin-left:3px; display:inline;">서울</h4>
+          <h4 style="color: #75A8F2; margin-left:3px; display:inline;">ソウル</h4>
 
           <button
             class="btn btn-outline-secondary1 pull-right"
             @click="update"
             style="display:inline-block; margin-top:10%; width:17rem;"
             v-show="currentTab === 0"
-          >Update</button>
+          >アップデート</button>
         </div>
       </div>
       <!-- div class row 끝 -->
 
       <!-- UserInfo -->
-      <div v-show="currentTab === 0" class="row" style="position:absolute; right:40.5%; top:31%;">
+      <div v-show="currentTab === 0" class="row" style="position:absolute; right:38.5%; top:40%;">
         <div style="margin-top:0;">
           <form>
             <!-- UserInfo -->
             <div>
-              <h5 style="color:#93c3f3;">UserInformation</h5>
+              <h5 style="color:#93c3f3;">ユーザーインフォメーション</h5>
 
               <div class="form-group">
-                <label for="email">Email address</label>
+                <label for="email">メール</label>
                 <input
                   type="email"
                   v-model="email"
@@ -95,7 +98,7 @@
                 />
               </div>
               <div class="form-group">
-                <label for="password">Password</label>
+                <label for="password">パスワード</label>
                 <input
                   type="password"
                   v-model="password"
@@ -109,9 +112,9 @@
             <!-- UserProf -->
             <div>
               <br />
-              <h5 style="color:#93c3f3;">UserProfile</h5>
+              <h5 style="color:#93c3f3;">ユーザーのプロフィール</h5>
               <div class="form-group">
-                <label for="name">Name</label>
+                <label for="name">名前</label>
                 <input
                   type="text"
                   v-model="name"
@@ -122,8 +125,8 @@
                 />
               </div>
               <div v-if="roles =='2'" class="form-group">
-                <label for="tel">Role</label>
-                <input type="text" class="form-control" name="roles" placeholder="판매자" readonly />
+                <label for="tel">ロール</label>
+                <input type="text" class="form-control" name="roles" placeholder="売り手" readonly />
               </div>
               <!-- <div class="form-group">
               <label for="name">Introduce</label>
@@ -142,18 +145,18 @@
       </div>
 
       <!-- Check -->
-      <div v-show="currentTab === 1" class="row" style=" position:absolute; right:28%; top:32%;">
+      <div v-show="currentTab === 1" class="row" style=" position:absolute; right:26.4%; top:40%;">
         <!-- <vue-event-calendar :events="demoEvents" v-for="rental in rentals"
           v-bind:key="rental.id"
         :rental="rental"></vue-event-calendar>-->
         <table class="table" style="text-align:center; font-family: 'Nanum Gothic', sans-serif;">
           <thead>
-            <tr>
-              <th scope="col">출발 시간</th>
-              <th scope="col">인수</th>
-              <th scope="col">예약자 이름</th>
-              <th scope="col">승인</th>
-              <th scope="col">취소</th>
+            <tr style="color:#66b3ff;">
+              <th scope="col">出発時間</th>
+              <th scope="col">人数</th>
+              <th scope="col">予約者</th>
+              <th scope="col">承認</th>
+              <th scope="col">キャンセル</th>
             </tr>
           </thead>
           <tbody
@@ -162,19 +165,22 @@
             :rental="rental"
             :rentals="rentals[index]"
           >
-            <tr>
-              <td>{{ rental.departure_date }}</td>
-              <td>{{ rental.number_of_people }}명</td>
-              <td>{{ rental.name }}</td>
+            <tr style="color: #000387;">
+              <th>{{ rental.departure_date }}</th>
+              <th>{{ rental.number_of_people }}人</th>
+              <th>{{ rental.name }}</th>
               <td>
                 <button
                   type="submit"
-                  class="btn btn-outline-primary btn-block"
+                  class="btn btn-outline-primary btn-block font-weight-bold"
                   @click="confirm(rental.id, index)"
-                >승인</button>
+                >承認</button>
               </td>
               <td>
-                <button class="btn btn-outline-danger btn-block" @click="removeRow(index)">취소</button>
+                <button
+                  class="btn btn-outline-danger btn-block font-weight-bold"
+                  @click="removeRow(index)"
+                >キャンセル</button>
               </td>
             </tr>
           </tbody>
@@ -191,14 +197,14 @@ import axios from "axios";
 export default {
   props: ["rental"],
   data() {
-    this.getUser().then(res => {
-      this.name = res.user.name
-      this.email = res.user.email
-      this.password = res.user.password
-      this.roles = res.user.roles
-      this.profile_photo = res.user.profile_photo
-      return res
-    })
+    this.getUser().then((res) => {
+      this.name = res.user.name;
+      this.email = res.user.email;
+      this.password = res.user.password;
+      this.roles = res.user.roles;
+      this.profile_photo = res.user.profile_photo;
+      return res;
+    });
     return {
       currentTab: 0,
       tab: null,
@@ -208,7 +214,7 @@ export default {
       password: "",
       roles: "",
       profile_photo: "",
-      rentals: []
+      rentals: [],
       /* demoEvents: [
         {
           date: '2020/03/18', // Required
@@ -226,56 +232,56 @@ export default {
   created() {
     axios
       .get("/api/apply", {
-        headers: { Authorization: `Bearer ${localStorage.usertoken}` }
+        headers: { Authorization: `Bearer ${localStorage.usertoken}` },
       })
-      .then(response => {
+      .then((response) => {
         this.rentals = response.data;
         console.log(response.data);
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
       });
   },
   methods: {
-    getUser () {
+    getUser() {
       return axios
         .get("/api/auth/profile", {
-          headers: { Authorization: `Bearer ${localStorage.usertoken}` }
+          headers: { Authorization: `Bearer ${localStorage.usertoken}` },
         })
-        .then(res => {
+        .then((res) => {
           // console.log(res.data)
-          return res.data
+          return res.data;
         })
-        .catch(err => {
-          console.log(err)
-        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
-    imageChanged (e) {
-      console.log(e.target.files[0])
-      var fileReader = new FileReader()
-      fileReader.readAsDataURL(e.target.files[0])
-      fileReader.onload = e => {
-        this.user.profile_photo = e.target.result
-      }
+    imageChanged(e) {
+      console.log(e.target.files[0]);
+      var fileReader = new FileReader();
+      fileReader.readAsDataURL(e.target.files[0]);
+      fileReader.onload = (e) => {
+        this.user.profile_photo = e.target.result;
+      };
     },
-    update () {
+    update() {
       this.$validator.updateDictionary({
         al: {
           attributes: {
-            name: 'emri'
-          }
-        }
-      })
-      this.$validator.setLocale('al')
+            name: "emri",
+          },
+        },
+      });
+      this.$validator.setLocale("al");
 
       this.$validator.validateAll().then(() => {
         axios
           .post("/api/myupdate", this.profile_photo)
-          .then(response => {
+          .then((response) => {
             /* this.$router.push('/') */
-            console.log(response)
+            console.log(response);
           })
-          .catch(err => {
+          .catch((err) => {
             console.log(err.response);
           });
       });
@@ -283,23 +289,25 @@ export default {
     confirm(id, index) {
       axios
         .post("http://15.165.203.24/api/confirm", { id: id })
-        .then(res => {
+        .then((res) => {
           console.log(res);
           this.rentals.splice(index, 1);
         })
-        .catch(err => {
+        .catch((err) => {
           console.log(err);
         });
     },
     removeRow(index) {
       this.rentals.splice(index, 1);
-    }
-  }
-}
+    },
+  },
+};
 </script>
 
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Noto+Serif+KR:wght@300&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Kosugi+Maru&display=swap");
+
 .upload-btn-wrapper {
   position: relative;
   overflow: hidden;
@@ -331,4 +339,5 @@ export default {
 }
 
 @import url("https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Noto+Serif+KR:wght@300&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Kosugi+Maru&display=swap");
 </style>
