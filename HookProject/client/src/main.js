@@ -78,7 +78,7 @@ Vue.prototype.moment = moment;
 
 Vue.config.productionTip = false;
 const base = axios.create({
-  baseURL: "http://15.165.203.24"
+  baseURL: "http://52.78.187.234"
 });
 Vue.prototype.$http = base;
 

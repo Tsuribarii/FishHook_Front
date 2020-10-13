@@ -18,7 +18,7 @@
         </thead>
         <tbody v-for="tide in tides" v-bind:key="tide.id" :tide="tide">
           <tr style="color: #000387;">
-            <th scope="row">8月 {{ tide.date }}日</th>
+            <th scope="row">10月 {{ tide.date }}日</th>
             <th>{{ tide.hide_tide }}</th>
           </tr>
         </tbody>
