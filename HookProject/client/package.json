@@ -22,7 +22,7 @@
     "cors": "^2.8.5",
     "jquery": "^3.5.0",
     "laravel-vue-pagination": "^2.3.1",
-    "luxon": "^1.23.0",
+    "luxon": "^2.5.2",
     "moment": "^2.25.3",
     "register-service-worker": "^1.7.1",
     "sweetalert": "^1.1.3",
